@@ -31,23 +31,50 @@ task/
 ├── .env.example                    # Sample environment variables template
 ├── README.md                       # Project documentation & course map
 ├── GIT_CHEAT_SHEET.md              # Quick reference for Git & GitHub workflows
+├── STUDENT_GIT_COMMANDS.md         # Live classroom demonstration playbook
 │
-└── day-01/
-    └── notebooks/
-        ├── 01_hello_python_and_basics.ipynb
-        ├── 02_variables_numbers_and_memory.ipynb
-        ├── 03_strings_and_cloud_formatting.ipynb
-        ├── 04_lists_tuples_and_dictionaries.ipynb
-        ├── 05_decisions_loops_and_cloud_functions.ipynb
-        ├── 06_aws_cloud_foundations_and_budget_shield.ipynb
-        └── create_day01_all_notebooks.py
+├── notes/                          # Master PDF Handbooks & Guides
+│   ├── Day_01_Python_Master_Handbook.pdf
+│   └── Module_03_AWS_Core_Services_Vehicle_Analogy_Guide.pdf
+│
+├── module_basic/                   # Core Python & Cloud Fundamentals (formerly day-01)
+│   └── notebooks/
+│       ├── 01_hello_python_and_basics.ipynb
+│       ├── 02_variables_numbers_and_memory.ipynb
+│       ├── 03_strings_and_cloud_formatting.ipynb
+│       ├── 04_lists_tuples_and_dictionaries.ipynb
+│       ├── 05_decisions_loops_and_cloud_functions.ipynb
+│       ├── 06_aws_cloud_foundations_and_budget_shield.ipynb
+│       ├── 07_functions_exception_handling.ipynb
+│       └── 08_class_objects.ipynb
+│
+└── module_03_aws_core/             # AWS Core Services (Compute, Storage & Networking)
+    ├── MODULE_03_AWS_CORE_STUDENT_NOTES.md
+    ├── presentation/
+    │   └── Module_03_AWS_Core_Services_Masterclass.pptx
+    ├── notes/
+    │   └── Module_03_AWS_Core_Services_Vehicle_Analogy_Guide.pdf
+    └── lab_guides/
+        ├── 01_ec2_launch_and_lifecycle_lab.md
+        ├── 02_storage_ebs_efs_s3_lab.md
+        └── 03_vpc_networking_and_security_lab.md
 ```
 
 ---
 
-## 📅 Day-by-Day Syllabus & Lab Roadmap
+## 📅 Curriculum & Lab Roadmap
 
-### **Day 01 · 11-Nov-2026**
+### **Module Basic: Python & Cloud Foundations**
+- **Python Core:** Variables, data structures, strings, loops, functions, OOP, and exception handling.
+- **AWS Foundations:** Global Infrastructure, Regions, AZs, Shared Responsibility Model, IAM.
+
+### **Module 03: AWS Core Services & Infrastructure (Vehicle Metaphor)**
+- **EC2 Compute (The Engine):** AMIs, instance types, Key Pairs, Security Groups, User Data automation, Custom AMIs (Golden Images), and Lifecycle billing.
+- **Storage Triad (The Storage Shootout):**
+  - **EBS (The Personal Trunk):** Block storage, gp3/io2, attachments, formatting, and snapshots.
+  - **EFS (The Shared Fleet Cargo):** Regional multi-mount NFSv4 file sharing across 100+ EC2s.
+  - **S3 (The Global Shipping Warehouse):** Buckets, objects, 11 9's durability, Block Public Access, and HTTPS bucket policies.
+- **VPC Networking (The Gated Industrial Highway):** CIDR blocks (`10.0.0.0/16`), Public Subnets, Private Subnets, Route Tables, Internet Gateways (IGW), NAT Gateways, Stateful Security Groups vs Stateless NACLs, and 3-Tier Enterprise Web Architecture.
 - **Python Core:**
   - Setup & installation, Python interactive shell and scripts.
   - Variables, memory addresses (`id()`), type systems, and immutable vs. mutable types.
