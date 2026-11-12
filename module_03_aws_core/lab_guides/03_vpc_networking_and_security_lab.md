@@ -169,3 +169,4 @@ When finishing the VPC lab:
 1. Delete any EC2 instances launched inside the VPC.
 2. Detach and delete the `task-igw` Internet Gateway.
 3. Delete the `task-nalgonda-vpc` (AWS will automatically remove the subnets and route tables).
+

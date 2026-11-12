@@ -194,3 +194,4 @@ Before leaving the lab:
 1. Select your test instances.
 2. Click **Instance state** ➔ **Stop instance** (to pause compute billing).
 3. If you no longer need the test instance, click **Instance state** ➔ **Terminate instance** (permanently removes instance and releases root EBS storage).
+

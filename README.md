@@ -48,10 +48,10 @@ task/
 │       ├── 07_functions_exception_handling.ipynb
 │       └── 08_class_objects.ipynb
 │
-└── module_03_aws_core/             # AWS Core Services (Compute, Storage & Networking)
+└── module_03_aws_core/             # AWS Core Services (3-Day Masterclass)
     ├── MODULE_03_AWS_CORE_STUDENT_NOTES.md
     ├── presentation/
-    │   └── Module_03_AWS_Core_Services_Masterclass.pptx
+    │   └── Module_03_AWS_Core_Services_Masterclass_v2.pptx
     ├── notes/
     │   └── Module_03_AWS_Core_Services_Vehicle_Analogy_Guide.pdf
     └── lab_guides/
@@ -68,13 +68,29 @@ task/
 - **Python Core:** Variables, data structures, strings, loops, functions, OOP, and exception handling.
 - **AWS Foundations:** Global Infrastructure, Regions, AZs, Shared Responsibility Model, IAM.
 
-### **Module 03: AWS Core Services & Infrastructure (Vehicle Metaphor)**
-- **EC2 Compute (The Engine):** AMIs, instance types, Key Pairs, Security Groups, User Data automation, Custom AMIs (Golden Images), and Lifecycle billing.
-- **Storage Triad (The Storage Shootout):**
-  - **EBS (The Personal Trunk):** Block storage, gp3/io2, attachments, formatting, and snapshots.
-  - **EFS (The Shared Fleet Cargo):** Regional multi-mount NFSv4 file sharing across 100+ EC2s.
-  - **S3 (The Global Shipping Warehouse):** Buckets, objects, 11 9's durability, Block Public Access, and HTTPS bucket policies.
-- **VPC Networking (The Gated Industrial Highway):** CIDR blocks (`10.0.0.0/16`), Public Subnets, Private Subnets, Route Tables, Internet Gateways (IGW), NAT Gateways, Stateful Security Groups vs Stateless NACLs, and 3-Tier Enterprise Web Architecture.
+### **Module 03: AWS Core Services & Infrastructure (3-Day Deep Dive)**
+- **Day 1: Compute & Storage Triad (The Engine & Luggage)**
+  - Global Infrastructure: Regions vs Availability Zones vs Edge Locations.
+  - High Availability: What is Multi-AZ (synchronous failover) vs Multi-Region (disaster recovery).
+  - EC2 Compute: AMIs, instance types, Key Pairs (`.pem`), Security Groups, and User Data bootstrapping.
+  - Custom AMIs (Golden Images) and EC2 Lifecycle billing states.
+  - Storage Shootout: Block (EBS gp3/io2) vs File (EFS multi-AZ NFS) vs Object (S3 11 9's durability).
+  - S3 Security: Block Public Access (BPA) & HTTPS-only JSON bucket policies.
+- **Day 2: Databases, VPC Networking, Edge Delivery & Security (The Highway & Vaults)**
+  - Databases: Amazon RDS Multi-AZ vs Amazon Aurora (6-way replication) vs Amazon DynamoDB (NoSQL) vs Amazon ElastiCache (Redis in-memory caching).
+  - VPC Architecture: Private Gated Highway, CIDR (`10.0.0.0/16`), and reserved IPs.
+  - Subnets: Public (0.0.0.0/0 -> IGW) vs Private (Route -> NAT Gateway).
+  - Firewalls: Stateful Security Groups (Personal Bodyguard) vs Stateless NACLs (Toll Gate Barrier).
+  - Edge & Protection: Application Load Balancer (ALB) vs Network Load Balancer (NLB), CloudFront CDN, AWS WAF (Web ACLs & rate-limiting) & AWS Shield.
+  - Enterprise 3-Tier Web Architecture Pattern (ALB ➔ EC2 ➔ RDS).
+- **Day 3: Containers, Serverless & Infrastructure as Code (IaC)**
+  - Containers 101: Virtual Machines vs Docker Containers (Kernel sharing).
+  - Amazon ECR: Authenticate, tag, build, and push Docker images via AWS CLI.
+  - Amazon ECS: EC2 Launch Type vs AWS Fargate (Serverless Containers).
+  - Architecture Showdown: Amazon ECS Containers vs AWS Lambda Container Images (15-min timeout vs 24/7).
+  - Infrastructure as Code (IaC): AWS CloudFormation (Parameters, Resources, Outputs).
+  - **CloudFormation Drift Detection:** Detecting & remediating manual out-of-band AWS Console edits.
+  - Zero-Dollar Student Hygiene: Complete lab teardown & billing protection.
 - **Python Core:**
   - Setup & installation, Python interactive shell and scripts.
   - Variables, memory addresses (`id()`), type systems, and immutable vs. mutable types.

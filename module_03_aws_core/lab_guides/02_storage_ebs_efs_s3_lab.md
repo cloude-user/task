@@ -179,3 +179,4 @@ Enforce corporate compliance: Any request sent over plain insecure HTTP must be 
 | Need to store images, videos, and backups accessible anywhere? | **Amazon S3** |
 | What is the durability of S3 and EFS? | **99.999999999% (11 9's)** |
 | What is the most critical S3 security setting? | **Block Public Access (BPA)** |
+
