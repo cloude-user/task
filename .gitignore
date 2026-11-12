@@ -1,0 +1,69 @@
+# =====================================================================
+# TASK Telangana · Cloud Software Developer - Git Shield
+# Trainer: Sundeep Hiremath
+# =====================================================================
+
+# --- 1. AWS & CLOUD SECRETS (NEVER COMMIT CREDENTIALS) ---
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.pub
+aws_credentials
+credentials.csv
+*.id_rsa
+*id_rsa*
+client_secrets.json
+service_account.json
+*.tfstate
+*.tfstate.*
+
+# --- 2. PYTHON & BYTECODE ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# --- 3. VIRTUAL ENVIRONMENTS ---
+.venv/
+venv/
+ENV/
+env/
+env.bak/
+venv.bak/
+
+# --- 4. JUPYTER NOTEBOOKS CHECKPOINTS ---
+.ipynb_checkpoints/
+*-checkpoint.ipynb
+.virtual_documents/
+
+# --- 5. IDEs & EDITORS ---
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# --- 6. OPERATING SYSTEM ARTIFACTS ---
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
