@@ -73,7 +73,7 @@ task/
 
 ### 2. Clone Repository
 ```bash
-git clone https://github.com/SundeepHiremat/task.git
+git clone https://github.com/cloude-user/task.git
 cd task
 ```
 

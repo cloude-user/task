@@ -40,7 +40,7 @@ git init
 git branch -M main
 
 # Clone existing repository from GitHub
-git clone https://github.com/SundeepHiremat/task.git
+git clone https://github.com/cloude-user/task.git
 ```
 
 ### Daily Development Loop
@@ -109,7 +109,10 @@ git branch -d feature/day-02-ec2
 
 ```bash
 # 1. Link your local repo to GitHub
-git remote add origin https://github.com/SundeepHiremat/task.git
+git remote add origin https://github.com/cloude-user/task.git
+
+# If origin already exists and you need to switch/update its URL:
+git remote set-url origin https://github.com/cloude-user/task.git
 
 # 2. Verify remote URL
 git remote -v
