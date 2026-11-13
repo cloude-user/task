@@ -1,7 +1,7 @@
 # Lab 1: Amazon EC2 Provisioning, Lifecycle & Custom AMIs
 > **Program:** TASK Telangana · Cloud Software Developer  
 > **Module 03:** AWS Core Services & Infrastructure  
-> **Trainer:** Sundeep Hiremath | Nalgonda Training Center  
+> **Trainer:** Sundeep Hiremat | Nalgonda Training Center  
 > **Analogy:** *Renting, Configuring & Duplicating the Vehicle Engine*
 
 ---
@@ -126,7 +126,7 @@ cat <<EOF > /var/www/html/index.html
     <div class="card">
         <span class="badge">TASK TELANGANA · NALGONDA CENTER</span>
         <h1>🚀 EC2 Web Server Bootstrapped!</h1>
-        <p>Trainer: <b>Sundeep Hiremath</b> | Cloud Software Developer</p>
+        <p>Trainer: <b>Sundeep Hiremat</b> | Cloud Software Developer</p>
         <div class="info">
             <p><b>Instance ID:</b> $INSTANCE_ID</p>
             <p><b>Availability Zone:</b> $AZ</p>

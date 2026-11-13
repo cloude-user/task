@@ -1,7 +1,7 @@
 # Lab 2: AWS Storage Triad (EBS Volumes, Snapshots, EFS & Secure S3 Buckets)
 > **Program:** TASK Telangana · Cloud Software Developer  
 > **Module 03:** AWS Core Services & Infrastructure  
-> **Trainer:** Sundeep Hiremath | Nalgonda Training Center  
+> **Trainer:** Sundeep Hiremat | Nalgonda Training Center  
 > **Analogy:** *The Personal Trunk (EBS), Shared Roof Cargo (EFS), and Global Container Depot (S3)*
 
 ---

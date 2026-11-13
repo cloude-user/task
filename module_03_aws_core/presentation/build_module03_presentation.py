@@ -82,7 +82,7 @@ def create_deck(output_path):
         tf = footer_box.text_frame
         tf.margin_top = Inches(0)
         p = tf.paragraphs[0]
-        p.text = "Trainer: Sundeep Hiremath  |  Nalgonda Training Center  |  AWS DVA-C02 Alignment  |  3-Day Masterclass"
+        p.text = "Trainer: Sundeep Hiremat  |  Nalgonda Training Center  |  AWS DVA-C02 Alignment  |  3-Day Masterclass"
         p.font.size = Pt(10)
         p.font.color.rgb = MUTED_TEXT
 
@@ -195,7 +195,7 @@ def create_deck(output_path):
     p3.space_before = Pt(10)
 
     p4 = tf.add_paragraph()
-    p4.text = "Trainer: Sundeep Hiremath  |  Nalgonda Center  |  AWS DVA-C02 Alignment  |  Vehicle Metaphor Guide"
+    p4.text = "Trainer: Sundeep Hiremat  |  Nalgonda Center  |  AWS DVA-C02 Alignment  |  Vehicle Metaphor Guide"
     p4.font.size = Pt(13)
     p4.font.color.rgb = AWS_ORANGE
     p4.space_before = Pt(20)
@@ -1068,7 +1068,7 @@ def create_deck(output_path):
         "4. RELEASE any allocated Elastic IPs (EIPs).",
         "",
         "Keep your AWS account at $0.00 balance!",
-        "Trainer: Sundeep Hiremath | Nalgonda Center"
+        "Trainer: Sundeep Hiremat | Nalgonda Center"
     ], card_bg=RGBColor(0xFE, 0xF9, 0xE7))
 
     prs.save(output_path)

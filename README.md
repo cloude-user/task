@@ -7,7 +7,7 @@
 
 Welcome to the official repository for the **Cloud Software Developer** training program conducted by **TASK (Telangana Academy for Skill and Knowledge)** at the **Nalgonda Center**.
 
-- **Trainer:** Sundeep Hiremath
+- **Trainer:** Sundeep Hiremat
 - **Program:** Cloud Software Developer (AWS EC2-Centric / DVA-C02 Alignment)
 - **Target Audience:** Engineering Students & Aspiring Cloud Engineers across Nalgonda colleges
 
@@ -35,7 +35,8 @@ task/
 │
 ├── notes/                          # Master PDF Handbooks & Guides
 │   ├── Day_01_Python_Master_Handbook.pdf
-│   └── Module_03_AWS_Core_Services_Vehicle_Analogy_Guide.pdf
+│   ├── Module_03_AWS_Core_Services_Vehicle_Analogy_Guide.pdf
+│   └── Module_03_Hands_On_Lab_Manual.pdf
 │
 ├── module_basic/                   # Core Python & Cloud Fundamentals (formerly day-01)
 │   └── notebooks/
@@ -48,16 +49,26 @@ task/
 │       ├── 07_functions_exception_handling.ipynb
 │       └── 08_class_objects.ipynb
 │
-└── module_03_aws_core/             # AWS Core Services (3-Day Masterclass)
-    ├── MODULE_03_AWS_CORE_STUDENT_NOTES.md
-    ├── presentation/
-    │   └── Module_03_AWS_Core_Services_Masterclass_v2.pptx
-    ├── notes/
-    │   └── Module_03_AWS_Core_Services_Vehicle_Analogy_Guide.pdf
-    └── lab_guides/
-        ├── 01_ec2_launch_and_lifecycle_lab.md
-        ├── 02_storage_ebs_efs_s3_lab.md
-        └── 03_vpc_networking_and_security_lab.md
+├── module_03_aws_core/             # AWS Core Services (3-Day Masterclass)
+│   ├── MODULE_03_AWS_CORE_STUDENT_NOTES.md
+│   ├── presentation/
+│   │   └── Module_03_AWS_Core_Services_Masterclass_v2.pptx
+│   ├── notes/
+│   │   └── Module_03_AWS_Core_Services_Vehicle_Analogy_Guide.pdf
+│   └── lab_guides/
+│       ├── Module_03_Hands_On_Lab_Manual.pdf
+│       ├── 01_ec2_launch_and_lifecycle_lab.md
+│       ├── 02_storage_ebs_efs_s3_lab.md
+│       └── 03_vpc_networking_and_security_lab.md
+│
+└── mini_projects/                  # Student Production Cloud Projects
+    └── project_01_cloud_portfolio/
+        ├── PROJECT_01_CLOUD_PORTFOLIO_GUIDE.md
+        ├── Project_01_Cloud_Portfolio_Manual.pdf
+        └── portfolio_template/
+            ├── index.html
+            ├── css/style.css
+            └── js/main.js
 ```
 
 ---
@@ -159,7 +170,7 @@ This repository follows industry standards outlined in [GIT_CHEAT_SHEET.md](GIT_
 
 ## 👨‍🏫 Trainer & Contact
 
-**Sundeep Hiremath**  
+**Sundeep Hiremat**  
 *Corporate Trainer & Technical Lead*  
 *Cloud & AI Software Development*  
 TASK (Telangana Academy for Skill and Knowledge) Training Program

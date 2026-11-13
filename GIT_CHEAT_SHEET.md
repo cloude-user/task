@@ -1,5 +1,5 @@
 # Git & GitHub Mastery Cheat Sheet
-> **Trainer:** Sundeep Hiremath  
+> **Trainer:** Sundeep Hiremat  
 > **Program:** TASK Telangana · Cloud Software Developer  
 > **Reference:** `Git_and_GitHub_Mastery.pdf`
 

@@ -2,63 +2,29 @@
 > **TASK (Telangana Academy for Skill and Knowledge)**  
 > **Course:** Cloud Software Developer (AWS EC2-Centric / DVA-C02 Alignment)  
 > **Center:** Nalgonda Training Center  
-> **Trainer:** Sundeep Hiremath  
+> **Trainer:** Sundeep Hiremat  
 > **Delivery Plan:** 3-Day Technical Deep Dive  
 
 ---
 
 ## 📚 Module Overview & Resource Index
 
-Welcome to **Module 03**! This module is designed as an end-to-end 3-day deep dive covering foundational cloud infrastructure, compute engines, storage triads, databases, networking, edge security, containers, and infrastructure as code. Every topic is explained using our intuitive **Grand Vehicle & Fleet Metaphor**.
+Welcome to **Module 03**! This module is designed as an end-to-end 3-day deep dive covering foundational cloud infrastructure, compute engines, storage triads, databases, networking, edge security, containers, and infrastructure as code. Every topic is grounded in **The Grand Vehicle Metaphor** and backed by our explicit **Service Requirements & Decision Matrix**.
 
 ### Quick Links to Created Artifacts:
-- 📊 **PowerPoint Presentation (28 Widescreen Slides with Fixed High-Contrast Code Colors):**  
+- 📊 **PowerPoint Presentation (28 Widescreen Slides with High-Contrast Code Colors):**  
   [Module_03_AWS_Core_Services_Masterclass_v2.pptx](file:///F:/Task(%20Telangana%20)/Nalgonda/Projects/task/module_03_aws_core/presentation/Module_03_AWS_Core_Services_Masterclass_v2.pptx)
-- 📄 **Expanded 3-Day Printable PDF Guide:**  
+- 📄 **Module 03 Theory & Architectural PDF Guide:**  
   [Module_03_AWS_Core_Services_Vehicle_Analogy_Guide.pdf](file:///F:/Task(%20Telangana%20)/Nalgonda/Projects/task/module_03_aws_core/notes/Module_03_AWS_Core_Services_Vehicle_Analogy_Guide.pdf)
-- 📄 **Backup PDF in Notes folder:**  
-  [Module_03_AWS_Core_Services_Vehicle_Analogy_Guide.pdf](file:///F:/Task(%20Telangana%20)/Nalgonda/Projects/task/notes/Module_03_AWS_Core_Services_Vehicle_Analogy_Guide.pdf)
-- 🛠️ **Hands-on Lab 1 (EC2 & Lifecycle):** [01_ec2_launch_and_lifecycle_lab.md](file:///F:/Task(%20Telangana%20)/Nalgonda/Projects/task/module_03_aws_core/lab_guides/01_ec2_launch_and_lifecycle_lab.md)
-- 🛠️ **Hands-on Lab 2 (Storage Triad - EBS, EFS, S3):** [02_storage_ebs_efs_s3_lab.md](file:///F:/Task(%20Telangana%20)/Nalgonda/Projects/task/module_03_aws_core/lab_guides/02_storage_ebs_efs_s3_lab.md)
-- 🛠️ **Hands-on Lab 3 (VPC Networking & Security):** [03_vpc_networking_and_security_lab.md](file:///F:/Task(%20Telangana%20)/Nalgonda/Projects/task/module_03_aws_core/lab_guides/03_vpc_networking_and_security_lab.md)
-
----
-
-## 📅 3-Day Delivery Architecture
-
-```
-   +-----------------------------------------------------------------------------------------+
-   |                     MODULE 03: 3-DAY AWS CORE SERVICES ROADMAP                          |
-   +-----------------------------------------------------------------------------------------+
-   |  DAY 1: COMPUTE & STORAGE TRIAD                                                         |
-   |  • Global Infrastructure: Regions vs Availability Zones vs Edge Locations               |
-   |  • High Availability: What is Multi-AZ vs Multi-Region (Disaster Recovery)              |
-   |  • Amazon EC2: AMI Chassis, Instance Types, Key Pairs (.pem), Security Groups           |
-   |  • EC2 Automation: Bootstrapping with User Data shell scripts (IMDSv2)                   |
-   |  • Custom AMIs (Golden Images) & EC2 Lifecycle Billing State Machine                    |
-   |  • Storage Shootout: Block (EBS) vs File (EFS) vs Object (S3)                           |
-   |  • Amazon S3 Security: Block Public Access (BPA) & HTTPS-only JSON Bucket Policies      |
-   +-----------------------------------------------------------------------------------------+
-   |  DAY 2: DATABASES, NETWORKING & EDGE ACCELERATION                                       |
-   |  • Databases: Amazon RDS (Multi-AZ Standby vs Read Replicas) vs Amazon Aurora           |
-   |  • NoSQL & In-Memory: Amazon DynamoDB (Single-digit ms) vs ElastiCache (Redis)          |
-   |  • Amazon VPC: Gated Highway Architecture (CIDR 10.0.0.0/16, reserved IPs)              |
-   |  • Subnets: Public (0.0.0.0/0 -> IGW) vs Private (Route -> NAT Gateway)                 |
-   |  • Security: Stateful Security Groups (Bodyguard) vs Stateless NACLs (Toll Barrier)     |
-   |  • Load Balancing & Edge: ALB (Layer 7) vs NLB (Layer 4) + CloudFront CDN + AWS WAF     |
-   |  • Architecture Pattern: Enterprise 3-Tier Defense in Depth (ALB -> EC2 -> RDS)         |
-   +-----------------------------------------------------------------------------------------+
-   |  DAY 3: CONTAINERS, SERVERLESS & INFRASTRUCTURE AS CODE (IaC)                           |
-   |  • Containers 101: Virtual Machines vs Docker Containers (Kernel Sharing)               |
-   |  • Amazon ECR: Authenticate, tag, build, and push Docker images via AWS CLI             |
-   |  • Amazon ECS: EC2 Launch Type vs AWS Fargate (Serverless Containers)                   |
-   |  • Architecture Showdown: Amazon ECS Containers vs AWS Lambda Container Images          |
-   |  • Infrastructure as Code: Why AWS CloudFormation beats manual console clicking        |
-   |  • Template Anatomy: Parameters -> Resources -> Outputs & Intrinsic Functions           |
-   |  • CloudFormation Drift Detection: Detecting & Remediating out-of-band console edits    |
-   |  • Zero-Dollar Student Hygiene: Complete Lab Teardown & Billing Protection              |
-   +-----------------------------------------------------------------------------------------+
-```
+- 📄 **Consolidated Hands-on Lab Manual PDF:**  
+  [Module_03_Hands_On_Lab_Manual.pdf](file:///F:/Task(%20Telangana%20)/Nalgonda/Projects/task/module_03_aws_core/lab_guides/Module_03_Hands_On_Lab_Manual.pdf)
+- 🚀 **Mini Project 1: Cloud Portfolio on Ubuntu 24.04 + Nginx + GitHub:**  
+  [PROJECT_01_CLOUD_PORTFOLIO_GUIDE.md](file:///F:/Task(%20Telangana%20)/Nalgonda/Projects/task/mini_projects/project_01_cloud_portfolio/PROJECT_01_CLOUD_PORTFOLIO_GUIDE.md)  
+  *(Printable PDF: [Project_01_Cloud_Portfolio_Manual.pdf](file:///F:/Task(%20Telangana%20)/Nalgonda/Projects/task/mini_projects/project_01_cloud_portfolio/Project_01_Cloud_Portfolio_Manual.pdf))*
+- 🛠️ **Individual Lab Guides:**
+  - Lab 1 (EC2 & Lifecycle): [01_ec2_launch_and_lifecycle_lab.md](file:///F:/Task(%20Telangana%20)/Nalgonda/Projects/task/module_03_aws_core/lab_guides/01_ec2_launch_and_lifecycle_lab.md)
+  - Lab 2 (Storage Triad - EBS, EFS, S3): [02_storage_ebs_efs_s3_lab.md](file:///F:/Task(%20Telangana%20)/Nalgonda/Projects/task/module_03_aws_core/lab_guides/02_storage_ebs_efs_s3_lab.md)
+  - Lab 3 (VPC Networking & Security): [03_vpc_networking_and_security_lab.md](file:///F:/Task(%20Telangana%20)/Nalgonda/Projects/task/module_03_aws_core/lab_guides/03_vpc_networking_and_security_lab.md)
 
 ---
 
@@ -78,84 +44,132 @@ Welcome to **Module 03**! This module is designed as an end-to-end 3-day deep di
 
 ---
 
-## ⚡ 2. Global Infrastructure: Regions, AZs & Multi-AZ
+## 🎯 2. Service Requirements & Decision Matrix: What is Required & When to Use Which Service
 
-### How to Select an AWS Region:
-1. **Latency:** Select the region physically closest to your end users (e.g. `ap-south-1` Mumbai for India).
-2. **Data Sovereignty & Compliance:** Indian customer data must reside in Indian soil.
-3. **Service Availability:** Cutting-edge services frequently launch in `us-east-1` (N. Virginia) first.
-4. **Cost:** Minor tax and power tariff differences exist across regions.
+To succeed as a professional cloud engineer, you must know not just *what* a service does, but **what is required to configure it** and **the exact decision triggers** for when to choose it over alternatives:
 
-### Multi-AZ vs Multi-Region:
-- **Multi-AZ (High Availability):** Synchronous data replication across distinct data centers in the same city. If data center A experiences a power failure, automated health checks shift database traffic to the standby instance in data center B with zero data loss (99.99% availability).
-- **Multi-Region (Disaster Recovery):** Asynchronous replication across different continents (e.g. Mumbai + Frankfurt) for extreme disaster recovery and geographic latency optimization.
+### 1. Compute & Containers
 
----
+#### **Amazon EC2 (Elastic Compute Cloud)**
+- **What is Required to Launch:**
+  1. **AMI (Amazon Machine Image):** Base OS template (e.g. Amazon Linux 2023, Ubuntu 24.04 LTS).
+  2. **Instance Type:** CPU & RAM sizing (e.g. `t2.micro` or `t3.micro` for Free Tier).
+  3. **VPC Subnet:** Placement in an Availability Zone.
+  4. **Key Pair (`.pem` / `.ppk`):** Cryptographic SSH key for administrative login.
+  5. **Security Group:** Inbound firewall rule (e.g. Port 22 SSH from My IP, Port 80 HTTP from anywhere).
+  6. **Root EBS Volume:** Operating system disk (8–30 GB gp3).
+- **When to Use It:**
+  - When you need full administrative control (root access) over the operating system.
+  - When running legacy monolithic applications, custom software daemons, or specialized network configurations.
+- **When NOT to Use It:**
+  - Event-driven short tasks (use **AWS Lambda**).
+  - Microservices where you don't want to manage OS patches (use **AWS Fargate**).
 
-## 🗄️ 3. Databases: Relational vs NoSQL vs In-Memory
+#### **Amazon ECS (Elastic Container Service) with AWS Fargate**
+- **What is Required:**
+  1. **Docker Container Image:** Packaged and pushed to Amazon ECR.
+  2. **Task Definition:** CPU, memory, container port mappings, and environment variables.
+  3. **VPC Subnets & Security Group:** Network placement for the task's Elastic Network Interface (ENI).
+  4. **IAM Task Execution Role:** Grants ECS permission to pull from ECR and send logs to CloudWatch.
+- **When to Use It:**
+  - Deploying Docker containers that run continuously (web servers, background worker queues) without managing underlying EC2 virtual machines.
+- **When NOT to Use It:**
+  - Bursty, sporadic tasks that execute for less than 15 minutes (use **AWS Lambda**).
 
-```
-+-------------------+-------------------------------+-------------------------------+-------------------------------+
-| Database Service  | Engine / Model                | High Availability Pattern     | Best Architectural Fit        |
-+-------------------+-------------------------------+-------------------------------+-------------------------------+
-| **Amazon RDS**    | Relational SQL (Postgres/MySQL)| Multi-AZ Synchronous Standby  | Financial ERP, SQL schemas    |
-| **Amazon Aurora** | Cloud-native SQL (Postgres/MySQL)| 6-Way Storage across 3 AZs  | High-throughput auto-scaling  |
-| **DynamoDB**      | Serverless NoSQL (Key-Value)  | Single-digit ms, Global Tables| Shopping carts, gaming leader |
-| **ElastiCache**   | In-Memory Caching (Redis)     | In-memory cluster in RAM      | Session store, query offload  |
-+-------------------+-------------------------------+-------------------------------+-------------------------------+
-```
-
----
-
-## 🐳 4. Containers: Docker, Amazon ECR & Amazon ECS vs Lambda
-
-### 4.1 Step-by-Step ECR Push Commands via AWS CLI:
-```bash
-# 1. Authenticate Docker client to Amazon ECR
-aws ecr get-login-password --region ap-south-1 | \
-  docker login --username AWS --password-stdin 123456789012.dkr.ecr.ap-south-1.amazonaws.com
-
-# 2. Build local Docker image
-docker build -t task-cloud-app:latest .
-
-# 3. Tag image with Amazon ECR repository URI
-docker tag task-cloud-app:latest 123456789012.dkr.ecr.ap-south-1.amazonaws.com/task-cloud-app:latest
-
-# 4. Push image to Amazon ECR
-docker push 123456789012.dkr.ecr.ap-south-1.amazonaws.com/task-cloud-app:latest
-```
-
-### 4.2 Architectural Showdown: Amazon ECS vs AWS Lambda Containers:
-| Dimension | Amazon ECS (Fargate / EC2) | AWS Lambda Container Images |
+#### **AWS Lambda vs Amazon ECS Showdown**
+| Metric | Amazon ECS (Fargate) | AWS Lambda |
 |---|---|---|
-| **Max Execution Time** | **Unlimited / Continuous** (Runs 24/7/365) | **Strict 15-Minute Maximum** |
-| **Operational Model** | Persistent web APIs, worker services | Event-driven serverless (Scale-to-zero) |
-| **Max Image Size** | Dozens of Gigabytes | Max 10 GB container image |
-| **Cost Model** | Billed per-second of allocated vCPU/RAM | Billed per-millisecond of runtime ($0 if idle) |
-| **Best For** | Heavy web apps, background queue processing | S3 file processing, webhooks, cron ETL |
+| **Max Execution Duration** | **Unlimited / Continuous (24/7/365)** | **Strict 15-Minute Timeout** |
+| **Execution Trigger** | Continuous service or scheduled batch | Event-driven (S3 upload, API Gateway HTTP, DynamoDB stream) |
+| **Cost Model** | Pay per second of allocated vCPU/RAM | Pay per millisecond of execution; **$0 when idle (scale-to-zero)** |
+| **Best For** | Full web apps, real-time APIs, worker daemons | Image processing on upload, webhooks, lightweight cron ETL |
 
 ---
 
-## 📜 5. Infrastructure as Code (IaC) & CloudFormation Drift Detection
+### 2. Storage Triad: Block vs File vs Object
 
-### Why CloudFormation Beats "ClickOps":
-- **Repeatable & Automated:** Deploy complete multi-tier infrastructures in 5 minutes.
-- **Git Versioned:** Reviewed through Pull Requests, preventing undocumented manual changes.
-- **Atomic Deletions:** Deleting a stack deletes all child resources cleanly without orphan billing.
+#### **Amazon EBS (Elastic Block Store)**
+- **What is Required:** Must reside in the **exact same Availability Zone** as the target EC2 instance. Inside Linux, it must be formatted (`sudo mkfs -t ext4 /dev/xvdf`) and mounted (`sudo mount /dev/xvdf /mnt/data`).
+- **When to Use:** OS boot drives, local databases requiring ultra-low latency (<1ms) block I/O.
+- **When NOT to Use:** Shared storage across multiple instances (use **EFS**) or large media files (use **S3**).
 
-### What is Drift & How to Catch It?
-1. **Drift Definition:** When an engineer logs into the AWS Management Console and manually alters a resource (e.g. resizes an EC2 instance or opens Port 22 in a Security Group) without modifying the CloudFormation template.
-2. **Detection:** Run **Detect stack drift** in the AWS Console (or CLI: `aws cloudformation detect-stack-drift`).
-3. **Remediation:**
-   - **Option A:** Revert the manual console change back to match the template.
-   - **Option B:** Update the CloudFormation YAML template to match the desired change, and apply it through a CloudFormation **Change Set**.
+#### **Amazon EFS (Elastic File System)**
+- **What is Required:** Target VPC, Mount Targets in each AZ, Security Group allowing **Inbound NFS (Port 2049)** from EC2 instances.
+- **When to Use:** Multiple EC2 instances (100+) need concurrent read/write access to a shared directory (e.g. WordPress uploads, CMS media, shared home directories).
+- **When NOT to Use:** Relational database data files (use **EBS**) or static website hosting (use **S3**).
+
+#### **Amazon S3 (Simple Storage Service)**
+- **What is Required:** Globally unique bucket name (3–63 chars, lowercase, no underscores), AWS Region, Block Public Access enabled by default.
+- **When to Use:** Unlimited media assets (images, videos), document storage, data lake backups, static web hosting. 99.999999999% durability.
+- **When NOT to Use:** Block-level file modifications (S3 is object-based; updating a single byte requires replacing the entire object).
 
 ---
 
-## 🛡️ 6. Zero-Dollar Student Hygiene (Daily Sunset Rule)
+### 3. Databases: Relational vs NoSQL vs In-Memory
 
-1. **Stop or Terminate** all practice EC2 instances at the end of each session.
-2. Delete unattached EBS volumes in `available` state.
-3. Delete custom CloudFormation stacks once practical labs conclude.
-4. Release allocated Elastic IPs (EIPs).
-5. Verify an AWS Billing Alarm is active at $0.01.
+```
++-------------------+-------------------------------+-----------------------------------+-----------------------------------+
+| Database Service  | Engine / Model                | What is Required                  | When to Choose It                 |
++-------------------+-------------------------------+-----------------------------------+-----------------------------------+
+| **Amazon RDS**    | Relational SQL (Postgres/MySQL)| DB Subnet Group (2+ AZs), SG Port | Transactional ERP, complex JOINs, |
+|                   |                               | (5432/3306), Admin credentials    | automated Multi-AZ failover.      |
++-------------------+-------------------------------+-----------------------------------+-----------------------------------+
+| **Amazon Aurora** | Cloud-native SQL (Postgres/MySQL)| DB Subnet Group, Cluster endpoint| High-throughput enterprise SQL,   |
+|                   |                               |                                   | 5x faster, Serverless v2 scaling. |
++-------------------+-------------------------------+-----------------------------------+-----------------------------------+
+| **DynamoDB**      | Serverless NoSQL (Key-Value)  | Table name, Partition Key (PK),   | Single-digit ms latency at scale, |
+|                   |                               | Capacity mode (On-Demand)         | shopping carts, gaming, IoT.      |
++-------------------+-------------------------------+-----------------------------------+-----------------------------------+
+| **ElastiCache**   | In-Memory Cache (Redis)       | Cache Subnet Group, SG Port 6379  | Sub-millisecond read offload,     |
+|                   |                               |                                   | user session state, leaderboards. |
++-------------------+-------------------------------+-----------------------------------+-----------------------------------+
+```
+
+---
+
+### 4. VPC Networking, Edge Delivery & Security
+
+#### **Virtual Private Cloud (VPC)**
+- **What is Required:** IPv4 CIDR Block (Standard: `10.0.0.0/16` = 65,536 private IPs).
+- **When to Use:** Every enterprise deployment to create a private, isolated network perimeter.
+
+#### **Internet Gateway (IGW) vs NAT Gateway**
+- **Internet Gateway (IGW):**
+  - *What is Required:* Must be attached to VPC; Route Table must point `0.0.0.0/0` ➔ `igw-xxxx`.
+  - *When to Use:* Front-facing web servers, Application Load Balancers, or Bastion hosts that need **two-way direct communication** with public internet visitors.
+- **NAT Gateway:**
+  - *What is Required:* Must be placed in a **Public Subnet** with an **Elastic IP (EIP)** allocated; Private Route Table points `0.0.0.0/0` ➔ `nat-xxxx`.
+  - *When to Use:* Backend databases and private app servers that need **outbound-only access** (to download Linux OS patches, Python packages) while remaining **completely hidden and unreachable** from incoming internet attacks.
+
+#### **Security Groups (Stateful) vs Network ACLs (Stateless)**
+- **Security Groups (Stateful Personal Guard):** Operates at the network interface (instance) level. Allow rules only. Tracks connection state—if inbound is allowed, return traffic is automatically allowed. **Use as your primary application firewall.**
+- **Network ACLs (Stateless Toll Barrier):** Operates at the subnet boundary. Supports Allow and Deny rules evaluated in strict numerical order. Must explicitly permit both inbound and outbound traffic. **Use for subnet-level blacklisting (e.g. blocking specific malicious IP ranges).**
+
+#### **Application Load Balancer (ALB) vs CloudFront CDN**
+- **ALB (Layer 7):** Distributes incoming traffic across multiple EC2/ECS targets within a single region based on HTTP URL path routing (`/api` vs `/app`).
+- **CloudFront CDN:** Caches static and dynamic content globally across 600+ Edge Locations closer to users, lowering latency worldwide and absorbing DDoS attacks.
+
+---
+
+### 5. Infrastructure as Code (IaC) with AWS CloudFormation
+
+- **What is Required:** Declarative YAML or JSON template containing at minimum a `Resources` block.
+- **Why IaC beats "ClickOps":**
+  1. **Speed & Consistency:** Reproduce complex multi-tier environments across regions in 5 minutes.
+  2. **Auditability:** Stored in Git and reviewed via Pull Requests.
+  3. **Atomic Deletion:** Deleting a stack deletes all child resources cleanly with zero lingering orphan costs.
+- **CloudFormation Drift Detection:**
+  - *What is Drift?* Occurs when an engineer bypasses the template and manually edits a resource in the AWS Console.
+  - *How to Detect:* In AWS Console, select Stack ➔ **Stack actions ➔ Detect drift**.
+  - *How to Remediate:* Revert manual console changes to match the template, OR update the YAML template to adopt the change via a **Change Set**.
+
+---
+
+## 🛡️ 3. Student Zero-Dollar Sunset Checklist
+
+Every student must execute this 5-step checklist before leaving the college lab:
+1. **Stop or Terminate** all practice EC2 instances.
+2. Go to **EBS Volumes** and delete any unattached volumes in `available` state.
+3. Delete custom **CloudFormation stacks** to cleanly terminate all child resources.
+4. Release any allocated **Elastic IPs (EIPs)**.
+5. Check the **AWS Billing Dashboard** to confirm $0.00 active charges.

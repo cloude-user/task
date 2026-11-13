@@ -1,7 +1,7 @@
 # Lab 3: Amazon VPC Networking, Subnet Isolation & Defense-in-Depth
 > **Program:** TASK Telangana · Cloud Software Developer  
 > **Module 03:** AWS Core Services & Infrastructure  
-> **Trainer:** Sundeep Hiremath | Nalgonda Training Center  
+> **Trainer:** Sundeep Hiremat | Nalgonda Training Center  
 > **Analogy:** *The Gated Highway, Public Showrooms, VIP Vaults & Checkpoint Barriers*
 
 ---
