@@ -7,7 +7,7 @@
 
 Welcome to the official repository for the **Cloud Software Developer** training program conducted by **TASK (Telangana Academy for Skill and Knowledge)** at the **Nalgonda Center**.
 
-- **Trainer:** Sundeep Hiremath
+- **Trainer:** Sundeep Hiremat
 - **Program:** Cloud Software Developer (AWS EC2-Centric / DVA-C02 Alignment)
 - **Target Audience:** Engineering Students & Aspiring Cloud Engineers across Nalgonda colleges
 
@@ -31,23 +31,77 @@ task/
 ├── .env.example                    # Sample environment variables template
 ├── README.md                       # Project documentation & course map
 ├── GIT_CHEAT_SHEET.md              # Quick reference for Git & GitHub workflows
+├── STUDENT_GIT_COMMANDS.md         # Live classroom demonstration playbook
 │
-└── day-01/
-    └── notebooks/
-        ├── 01_hello_python_and_basics.ipynb
-        ├── 02_variables_numbers_and_memory.ipynb
-        ├── 03_strings_and_cloud_formatting.ipynb
-        ├── 04_lists_tuples_and_dictionaries.ipynb
-        ├── 05_decisions_loops_and_cloud_functions.ipynb
-        ├── 06_aws_cloud_foundations_and_budget_shield.ipynb
-        └── create_day01_all_notebooks.py
+├── notes/                          # Master PDF Handbooks & Guides
+│   ├── Day_01_Python_Master_Handbook.pdf
+│   ├── Module_03_AWS_Core_Services_Vehicle_Analogy_Guide.pdf
+│   └── Module_03_Hands_On_Lab_Manual.pdf
+│
+├── module_basic/                   # Core Python & Cloud Fundamentals (formerly day-01)
+│   └── notebooks/
+│       ├── 01_hello_python_and_basics.ipynb
+│       ├── 02_variables_numbers_and_memory.ipynb
+│       ├── 03_strings_and_cloud_formatting.ipynb
+│       ├── 04_lists_tuples_and_dictionaries.ipynb
+│       ├── 05_decisions_loops_and_cloud_functions.ipynb
+│       ├── 06_aws_cloud_foundations_and_budget_shield.ipynb
+│       ├── 07_functions_exception_handling.ipynb
+│       └── 08_class_objects.ipynb
+│
+├── module_03_aws_core/             # AWS Core Services (3-Day Masterclass)
+│   ├── MODULE_03_AWS_CORE_STUDENT_NOTES.md
+│   ├── presentation/
+│   │   └── Module_03_AWS_Core_Services_Masterclass_v2.pptx
+│   ├── notes/
+│   │   └── Module_03_AWS_Core_Services_Vehicle_Analogy_Guide.pdf
+│   └── lab_guides/
+│       ├── Module_03_Hands_On_Lab_Manual.pdf
+│       ├── 01_ec2_launch_and_lifecycle_lab.md
+│       ├── 02_storage_ebs_efs_s3_lab.md
+│       └── 03_vpc_networking_and_security_lab.md
+│
+└── mini_projects/                  # Student Production Cloud Projects
+    └── project_01_cloud_portfolio/
+        ├── PROJECT_01_CLOUD_PORTFOLIO_GUIDE.md
+        ├── Project_01_Cloud_Portfolio_Manual.pdf
+        └── portfolio_template/
+            ├── index.html
+            ├── css/style.css
+            └── js/main.js
 ```
 
 ---
 
-## 📅 Day-by-Day Syllabus & Lab Roadmap
+## 📅 Curriculum & Lab Roadmap
 
-### **Day 01 · 11-Nov-2026**
+### **Module Basic: Python & Cloud Foundations**
+- **Python Core:** Variables, data structures, strings, loops, functions, OOP, and exception handling.
+- **AWS Foundations:** Global Infrastructure, Regions, AZs, Shared Responsibility Model, IAM.
+
+### **Module 03: AWS Core Services & Infrastructure (3-Day Deep Dive)**
+- **Day 1: Compute & Storage Triad (The Engine & Luggage)**
+  - Global Infrastructure: Regions vs Availability Zones vs Edge Locations.
+  - High Availability: What is Multi-AZ (synchronous failover) vs Multi-Region (disaster recovery).
+  - EC2 Compute: AMIs, instance types, Key Pairs (`.pem`), Security Groups, and User Data bootstrapping.
+  - Custom AMIs (Golden Images) and EC2 Lifecycle billing states.
+  - Storage Shootout: Block (EBS gp3/io2) vs File (EFS multi-AZ NFS) vs Object (S3 11 9's durability).
+  - S3 Security: Block Public Access (BPA) & HTTPS-only JSON bucket policies.
+- **Day 2: Databases, VPC Networking, Edge Delivery & Security (The Highway & Vaults)**
+  - Databases: Amazon RDS Multi-AZ vs Amazon Aurora (6-way replication) vs Amazon DynamoDB (NoSQL) vs Amazon ElastiCache (Redis in-memory caching).
+  - VPC Architecture: Private Gated Highway, CIDR (`10.0.0.0/16`), and reserved IPs.
+  - Subnets: Public (0.0.0.0/0 -> IGW) vs Private (Route -> NAT Gateway).
+  - Firewalls: Stateful Security Groups (Personal Bodyguard) vs Stateless NACLs (Toll Gate Barrier).
+  - Edge & Protection: Application Load Balancer (ALB) vs Network Load Balancer (NLB), CloudFront CDN, AWS WAF (Web ACLs & rate-limiting) & AWS Shield.
+  - Enterprise 3-Tier Web Architecture Pattern (ALB ➔ EC2 ➔ RDS).
+- **Day 3: Containers, Serverless & Infrastructure as Code (IaC)**
+  - Containers 101: Virtual Machines vs Docker Containers (Kernel sharing).
+  - Amazon ECR: Authenticate, tag, build, and push Docker images via AWS CLI.
+  - Amazon ECS: EC2 Launch Type vs AWS Fargate (Serverless Containers).
+  - Architecture Showdown: Amazon ECS Containers vs AWS Lambda Container Images (15-min timeout vs 24/7).
+  - Infrastructure as Code (IaC): AWS CloudFormation (Parameters, Resources, Outputs).
+  - **CloudFormation Drift Detection:** Detecting & remediating manual out-of-band AWS Console edits.
+  - Zero-Dollar Student Hygiene: Complete lab teardown & billing protection.
 - **Python Core:**
   - Setup & installation, Python interactive shell and scripts.
   - Variables, memory addresses (`id()`), type systems, and immutable vs. mutable types.
@@ -116,7 +170,7 @@ This repository follows industry standards outlined in [GIT_CHEAT_SHEET.md](GIT_
 
 ## 👨‍🏫 Trainer & Contact
 
-**Sundeep Hiremath**  
+**Sundeep Hiremat**  
 *Corporate Trainer & Technical Lead*  
 *Cloud & AI Software Development*  
 TASK (Telangana Academy for Skill and Knowledge) Training Program

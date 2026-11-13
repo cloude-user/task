@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloud Developer Portfolio | AWS Certified</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="navbar">
+        <div class="logo">⚡ CLOUD.DEV</div>
+        <nav>
+            <a href="#about">About</a>
+            <a href="#skills">Skills</a>
+            <a href="#projects">Projects</a>
+            <a href="#architecture">Architecture</a>
+            <a href="#contact" class="btn-contact">Contact</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="badge">TASK TELANGANA · CLOUD SOFTWARE DEVELOPER</div>
+        <h1>Hi, I'm <span class="highlight">Gauri Yadav</span></h1>
+        <p class="tagline">Aspiring Cloud & DevOps Engineer | AWS EC2 · Docker · Python · Nginx</p>
+        <p class="meta-server">🚀 Hosted live on <strong>Amazon Web Services EC2 (Ubuntu 24.04 LTS)</strong> powered by <strong>Nginx</strong></p>
+        <div class="hero-actions">
+            <a href="#projects" class="btn-primary">View Projects</a>
+            <a href="#skills" class="btn-secondary">My Cloud Stack</a>
+        </div>
+    </section>
+
+    <section id="about" class="section">
+        <h2>About Me</h2>
+        <div class="card about-card">
+            <p>I am an engineering student participating in the intensive <strong>Cloud Software Developer</strong> training program conducted by <strong>TASK (Telangana Academy for Skill and Knowledge)</strong> at the <strong>Nalgonda Center</strong> under Trainer <strong>Sundeep Hiremat</strong>.</p>
+            <p>Passionate about cloud infrastructure, Infrastructure as Code, Linux automation, containerization, and building highly available, secure microservices on AWS.</p>
+        </div>
+    </section>
+
+    <section id="skills" class="section">
+        <h2>Cloud & Developer Skills</h2>
+        <div class="skills-grid">
+            <div class="skill-card">
+                <h3>☁️ AWS Cloud Core</h3>
+                <p>EC2, EBS, EFS, S3, VPC Networking, Security Groups, IAM, RDS PostgreSQL, Aurora</p>
+            </div>
+            <div class="skill-card">
+                <h3>🐧 Linux & Web Ops</h3>
+                <p>Ubuntu 24.04 LTS, Nginx Web Server, Bash Shell Scripting, SSH, Systemd Daemons</p>
+            </div>
+            <div class="skill-card">
+                <h3>🐳 Containers & DevOps</h3>
+                <p>Docker, Amazon ECR, Amazon ECS (Fargate), AWS CloudFormation (IaC), Git & GitHub</p>
+            </div>
+            <div class="skill-card">
+                <h3>🐍 Programming</h3>
+                <p>Python Core, Boto3 AWS SDK, REST APIs, Object-Oriented Programming (OOP)</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="section">
+        <h2>Featured Cloud Projects</h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <span class="project-tag">AWS EC2 + NGINX</span>
+                <h3>Project 1: Live Cloud Portfolio Deployment</h3>
+                <p>Provisioned an Ubuntu 24.04 LTS instance on AWS EC2, configured Nginx web server, and established Git-based CI/CD deployment from GitHub.</p>
+                <div class="tech-tags">
+                    <span>AWS EC2</span><span>Ubuntu 24.04</span><span>Nginx</span><span>Git</span>
+                </div>
+            </div>
+            <div class="project-card">
+                <span class="project-tag">NETWORKING & SECURITY</span>
+                <h3>Project 2: Isolated Multi-Tier VPC</h3>
+                <p>Designed a custom 10.0.0.0/16 VPC with Public/Private subnets, Internet Gateway, and Stateful Security Groups implementing defense-in-depth.</p>
+                <div class="tech-tags">
+                    <span>VPC</span><span>Subnets</span><span>Route Tables</span><span>IGW</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="architecture" class="section">
+        <h2>Deployment Architecture</h2>
+        <div class="card architecture-card">
+            <pre><code>
+ [ Recruiter / Browser ] 
+          │ (HTTP Port 80)
+          ▼
+   [ AWS Security Group Firewall (0.0.0.0/0:80) ]
+          │
+          ▼
+ [ Ubuntu 24.04 LTS EC2 Instance (t2.micro / ap-south-1) ]
+          │
+          ▼
+ [ Nginx High-Performance Web Server Daemon ]
+          │
+          ▼
+ [ Cloned GitHub Repository (/var/www/html) ]
+            </code></pre>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; <span id="year"></span> Gauri Yadav · Cloud Software Developer · Trained by Sundeep Hiremat</p>
+        <p>Built with ❤️ on Amazon Web Services</p>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
+

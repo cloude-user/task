@@ -1,0 +1,226 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: #0F172A;
+    color: #F8FAFC;
+    line-height: 1.6;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem 8%;
+    background-color: #1E293B;
+    border-bottom: 1px solid #334155;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo {
+    font-family: 'Fira Code', monospace;
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: #38BDF8;
+}
+
+nav a {
+    color: #94A3B8;
+    text-decoration: none;
+    margin-left: 1.8rem;
+    font-size: 0.95rem;
+    transition: color 0.2s ease;
+}
+
+nav a:hover {
+    color: #F8FAFC;
+}
+
+.btn-contact {
+    background-color: #FF9900;
+    color: #0F172A !important;
+    font-weight: 600;
+    padding: 0.45rem 1.1rem;
+    border-radius: 6px;
+}
+
+.hero {
+    text-align: center;
+    padding: 5rem 10% 4rem;
+    background: radial-gradient(circle at top, #1E293B, #0F172A);
+}
+
+.badge {
+    display: inline-block;
+    background-color: #FF9900;
+    color: #0F172A;
+    font-weight: 700;
+    font-size: 0.8rem;
+    padding: 0.3rem 0.9rem;
+    border-radius: 20px;
+    letter-spacing: 0.5px;
+    margin-bottom: 1.2rem;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    margin-bottom: 0.8rem;
+}
+
+.highlight {
+    color: #38BDF8;
+}
+
+.tagline {
+    font-size: 1.2rem;
+    color: #94A3B8;
+    max-width: 650px;
+    margin: 0 auto 1.5rem;
+}
+
+.meta-server {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.85rem;
+    color: #4ADE80;
+    background: #1E293B;
+    display: inline-block;
+    padding: 0.4rem 1rem;
+    border-radius: 6px;
+    border: 1px solid #334155;
+    margin-bottom: 2rem;
+}
+
+.hero-actions .btn-primary {
+    background-color: #38BDF8;
+    color: #0F172A;
+    font-weight: 600;
+    padding: 0.75rem 1.6rem;
+    border-radius: 8px;
+    text-decoration: none;
+    margin-right: 1rem;
+}
+
+.hero-actions .btn-secondary {
+    border: 1px solid #475569;
+    color: #F8FAFC;
+    padding: 0.75rem 1.6rem;
+    border-radius: 8px;
+    text-decoration: none;
+}
+
+.section {
+    padding: 4rem 12%;
+}
+
+.section h2 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    position: relative;
+    padding-bottom: 0.5rem;
+}
+
+.section h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 50px;
+    height: 3px;
+    background-color: #FF9900;
+}
+
+.card {
+    background-color: #1E293B;
+    border: 1px solid #334155;
+    border-radius: 10px;
+    padding: 2rem;
+}
+
+.about-card p {
+    margin-bottom: 1rem;
+    color: #CBD5E1;
+}
+
+.skills-grid, .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+}
+
+.skill-card {
+    background-color: #1E293B;
+    border: 1px solid #334155;
+    border-radius: 10px;
+    padding: 1.8rem;
+}
+
+.skill-card h3 {
+    font-size: 1.15rem;
+    margin-bottom: 0.6rem;
+    color: #38BDF8;
+}
+
+.skill-card p {
+    color: #94A3B8;
+    font-size: 0.9rem;
+}
+
+.project-card {
+    background-color: #1E293B;
+    border: 1px solid #334155;
+    border-radius: 10px;
+    padding: 2rem;
+    border-top: 4px solid #FF9900;
+}
+
+.project-tag {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.75rem;
+    color: #FF9900;
+    font-weight: 600;
+}
+
+.project-card h3 {
+    margin: 0.5rem 0 0.8rem;
+    font-size: 1.3rem;
+}
+
+.project-card p {
+    color: #94A3B8;
+    font-size: 0.9rem;
+    margin-bottom: 1.2rem;
+}
+
+.tech-tags span {
+    display: inline-block;
+    background: #0F172A;
+    color: #38BDF8;
+    font-size: 0.75rem;
+    font-family: 'Fira Code', monospace;
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+    margin-right: 0.5rem;
+    margin-bottom: 0.4rem;
+}
+
+.architecture-card pre {
+    font-family: 'Fira Code', monospace;
+    color: #4ADE80;
+    font-size: 0.85rem;
+    overflow-x: auto;
+}
+
+footer {
+    text-align: center;
+    padding: 2.5rem 10%;
+    border-top: 1px solid #334155;
+    color: #64748B;
+    font-size: 0.85rem;
+}
+

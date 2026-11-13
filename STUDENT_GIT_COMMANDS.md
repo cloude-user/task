@@ -1,5 +1,5 @@
 # Live Classroom Demo: Git Commands & Remote Management
-> **Trainer:** Sundeep Hiremath  
+> **Trainer:** Sundeep Hiremat  
 > **GitHub Organization/User:** [`cloude-user`](https://github.com/cloude-user)  
 > **Target Repository:** `https://github.com/cloude-user/task.git`  
 > **Reference Guide:** `Git_and_GitHub_Mastery.pdf`
