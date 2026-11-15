@@ -1,6 +1,6 @@
 # =====================================================================
 # TASK Telangana · Cloud Software Developer - Git Shield
-# Trainer: Sundeep Hiremath
+# Trainer: Sundeep Hiremat
 # =====================================================================
 
 # --- 1. AWS & CLOUD SECRETS (NEVER COMMIT CREDENTIALS) ---
@@ -69,3 +69,12 @@ ehthumbs.db
 Desktop.ini
 $RECYCLE.BIN/
 
+# --- 7. BUILD, SETUP & CREATION SCRIPTS ---
+build_*.py
+build*.py
+create_*.py
+create*.py
+**/build_*.py
+**/build*.py
+**/create_*.py
+**/create*.py
