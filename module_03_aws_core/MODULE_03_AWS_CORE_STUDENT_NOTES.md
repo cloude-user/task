@@ -12,14 +12,14 @@
 Welcome to **Module 03**! This module is designed as an end-to-end 3-day deep dive covering foundational cloud infrastructure, compute engines, storage triads, databases, networking, edge security, containers, and infrastructure as code. Every topic is grounded in **The Grand Vehicle Metaphor** and backed by our explicit **Service Requirements & Decision Matrix**.
 
 ### Quick Links to Created Artifacts:
-- 📄 **Part A: VPC & Cloud Networking Master Guide & Gated Township Analogy (PDF):**  
+- 📄 **Part A: VPC & Cloud Networking Master Guide & Tollywood Cinema Analogy (PDF):**  
   [Module_03_Part_A_VPC_and_Networking_Master_Guide.pdf](file:///e:/trainer/task/notes/Module_03_Part_A_VPC_and_Networking_Master_Guide.pdf)  
   *(Markdown: [MODULE_03_PART_A_VPC_AND_NETWORKING_MASTER_NOTES.md](file:///e:/trainer/task/module_03_aws_core/notes/MODULE_03_PART_A_VPC_AND_NETWORKING_MASTER_NOTES.md))*
-- 📄 **Part B: Compute, Storage Triad, Databases & IaC CloudFormation Master Guide (PDF):**  
+- 📄 **Part B: Compute, Storage Triad, Databases & IaC Master Guide & Tollywood/Kirana Analogy (PDF):**  
   [Module_03_Part_B_Compute_Storage_Databases_IaC_Master_Guide.pdf](file:///e:/trainer/task/notes/Module_03_Part_B_Compute_Storage_Databases_IaC_Master_Guide.pdf)  
   *(Markdown: [MODULE_03_PART_B_COMPUTE_STORAGE_DATABASES_IAC_MASTER_NOTES.md](file:///e:/trainer/task/module_03_aws_core/notes/MODULE_03_PART_B_COMPUTE_STORAGE_DATABASES_IAC_MASTER_NOTES.md))*
-- 📊 **PowerPoint Presentation (28 Widescreen Slides with High-Contrast Code Colors):**  
-  [Module_03_AWS_Core_Services_Masterclass_v2.pptx](file:///e:/trainer/task/module_03_aws_core/presentation/Module_03_AWS_Core_Services_Masterclass_v2.pptx)
+- 📊 **PowerPoint Presentation (28 Widescreen Slides with Tollywood Analogies & High-Contrast Code Colors):**  
+  [Module_03_AWS_Core_Services_Masterclass.pptx](file:///e:/trainer/task/module_03_aws_core/presentation/Module_03_AWS_Core_Services_Masterclass.pptx)
 - 📄 **Consolidated Hands-on Lab Manual PDF:**  
   [Module_03_Hands_On_Lab_Manual.pdf](file:///e:/trainer/task/notes/Module_03_Hands_On_Lab_Manual.pdf)
 - 🚀 **Mini Project 1: Cloud Portfolio on Ubuntu 24.04 + Nginx + GitHub:**  

@@ -20,6 +20,7 @@ service_account.json
 *.tfstate.*
 
 # --- 2. PYTHON & BYTECODE ---
+*_v2.*
 __pycache__/
 *.py[cod]
 *$py.class
