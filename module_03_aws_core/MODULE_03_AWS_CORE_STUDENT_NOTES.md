@@ -12,19 +12,23 @@
 Welcome to **Module 03**! This module is designed as an end-to-end 3-day deep dive covering foundational cloud infrastructure, compute engines, storage triads, databases, networking, edge security, containers, and infrastructure as code. Every topic is grounded in **The Grand Vehicle Metaphor** and backed by our explicit **Service Requirements & Decision Matrix**.
 
 ### Quick Links to Created Artifacts:
+- 📄 **Part A: VPC & Cloud Networking Master Guide & Gated Township Analogy (PDF):**  
+  [Module_03_Part_A_VPC_and_Networking_Master_Guide.pdf](file:///e:/trainer/task/notes/Module_03_Part_A_VPC_and_Networking_Master_Guide.pdf)  
+  *(Markdown: [MODULE_03_PART_A_VPC_AND_NETWORKING_MASTER_NOTES.md](file:///e:/trainer/task/module_03_aws_core/notes/MODULE_03_PART_A_VPC_AND_NETWORKING_MASTER_NOTES.md))*
+- 📄 **Part B: Compute, Storage Triad, Databases & IaC CloudFormation Master Guide (PDF):**  
+  [Module_03_Part_B_Compute_Storage_Databases_IaC_Master_Guide.pdf](file:///e:/trainer/task/notes/Module_03_Part_B_Compute_Storage_Databases_IaC_Master_Guide.pdf)  
+  *(Markdown: [MODULE_03_PART_B_COMPUTE_STORAGE_DATABASES_IAC_MASTER_NOTES.md](file:///e:/trainer/task/module_03_aws_core/notes/MODULE_03_PART_B_COMPUTE_STORAGE_DATABASES_IAC_MASTER_NOTES.md))*
 - 📊 **PowerPoint Presentation (28 Widescreen Slides with High-Contrast Code Colors):**  
-  [Module_03_AWS_Core_Services_Masterclass_v2.pptx](file:///F:/Task(%20Telangana%20)/Nalgonda/Projects/task/module_03_aws_core/presentation/Module_03_AWS_Core_Services_Masterclass_v2.pptx)
-- 📄 **Module 03 Theory & Architectural PDF Guide:**  
-  [Module_03_AWS_Core_Services_Vehicle_Analogy_Guide.pdf](file:///F:/Task(%20Telangana%20)/Nalgonda/Projects/task/module_03_aws_core/notes/Module_03_AWS_Core_Services_Vehicle_Analogy_Guide.pdf)
+  [Module_03_AWS_Core_Services_Masterclass_v2.pptx](file:///e:/trainer/task/module_03_aws_core/presentation/Module_03_AWS_Core_Services_Masterclass_v2.pptx)
 - 📄 **Consolidated Hands-on Lab Manual PDF:**  
-  [Module_03_Hands_On_Lab_Manual.pdf](file:///F:/Task(%20Telangana%20)/Nalgonda/Projects/task/module_03_aws_core/lab_guides/Module_03_Hands_On_Lab_Manual.pdf)
+  [Module_03_Hands_On_Lab_Manual.pdf](file:///e:/trainer/task/notes/Module_03_Hands_On_Lab_Manual.pdf)
 - 🚀 **Mini Project 1: Cloud Portfolio on Ubuntu 24.04 + Nginx + GitHub:**  
-  [PROJECT_01_CLOUD_PORTFOLIO_GUIDE.md](file:///F:/Task(%20Telangana%20)/Nalgonda/Projects/task/mini_projects/project_01_cloud_portfolio/PROJECT_01_CLOUD_PORTFOLIO_GUIDE.md)  
-  *(Printable PDF: [Project_01_Cloud_Portfolio_Manual.pdf](file:///F:/Task(%20Telangana%20)/Nalgonda/Projects/task/mini_projects/project_01_cloud_portfolio/Project_01_Cloud_Portfolio_Manual.pdf))*
+  [PROJECT_01_CLOUD_PORTFOLIO_GUIDE.md](file:///e:/trainer/task/mini_projects/project_01_cloud_portfolio/PROJECT_01_CLOUD_PORTFOLIO_GUIDE.md)  
+  *(Printable PDF: [Project_01_Cloud_Portfolio_Manual.pdf](file:///e:/trainer/task/mini_projects/project_01_cloud_portfolio/Project_01_Cloud_Portfolio_Manual.pdf))*
 - 🛠️ **Individual Lab Guides:**
-  - Lab 1 (EC2 & Lifecycle): [01_ec2_launch_and_lifecycle_lab.md](file:///F:/Task(%20Telangana%20)/Nalgonda/Projects/task/module_03_aws_core/lab_guides/01_ec2_launch_and_lifecycle_lab.md)
-  - Lab 2 (Storage Triad - EBS, EFS, S3): [02_storage_ebs_efs_s3_lab.md](file:///F:/Task(%20Telangana%20)/Nalgonda/Projects/task/module_03_aws_core/lab_guides/02_storage_ebs_efs_s3_lab.md)
-  - Lab 3 (VPC Networking & Security): [03_vpc_networking_and_security_lab.md](file:///F:/Task(%20Telangana%20)/Nalgonda/Projects/task/module_03_aws_core/lab_guides/03_vpc_networking_and_security_lab.md)
+  - Lab 1 (EC2 & Lifecycle): [01_ec2_launch_and_lifecycle_lab.md](file:///e:/trainer/task/module_03_aws_core/lab_guides/01_ec2_launch_and_lifecycle_lab.md)
+  - Lab 2 (Storage Triad - EBS, EFS, S3): [02_storage_ebs_efs_s3_lab.md](file:///e:/trainer/task/module_03_aws_core/lab_guides/02_storage_ebs_efs_s3_lab.md)
+  - Lab 3 (VPC Networking & Security): [03_vpc_networking_and_security_lab.md](file:///e:/trainer/task/module_03_aws_core/lab_guides/03_vpc_networking_and_security_lab.md)
 
 ---
 

@@ -35,7 +35,8 @@ task/
 │
 ├── notes/                          # Master PDF Handbooks & Guides
 │   ├── Day_01_Python_Master_Handbook.pdf
-│   ├── Module_03_AWS_Core_Services_Vehicle_Analogy_Guide.pdf
+│   ├── Module_03_Part_A_VPC_and_Networking_Master_Guide.pdf
+│   ├── Module_03_Part_B_Compute_Storage_Databases_IaC_Master_Guide.pdf
 │   └── Module_03_Hands_On_Lab_Manual.pdf
 │
 ├── module_basic/                   # Core Python & Cloud Fundamentals (formerly day-01)
