@@ -83,47 +83,120 @@ echo "<h1>Hello from TASK Nalgonda Cloud Server!</h1>" > /usr/share/nginx/html/i
 
 ![Storage Triad Comparison](file:///e:/trainer/task/module_03_aws_core/notes/diagrams/04_storage_triad_comparison.png)
 
-| Characteristic | Amazon EBS (Block Storage) | Amazon EFS (File Storage) | Amazon S3 (Object Storage) |
-| :--- | :--- | :--- | :--- |
-| **Everyday Metaphor** | **The Car's Personal Trunk** | **The Shared Fleet Roof Rack** | **The Global Shipping Container Depot** |
-| **Storage Paradigm** | Raw unformatted virtual disk blocks | Hierarchical POSIX directory filesystem | Flat namespace object store (Buckets / Keys) |
-| **Scope & Availability** | **Single Availability Zone (AZ)** | **Regional (Multi-AZ synchronous)** | **Regional / Global (Replicated across 3+ AZs)** |
-| **Concurrent Access** | 1 EC2 instance (Multi-Attach io2 only) | **Thousands of EC2 instances concurrently** | **Unlimited clients via HTTPS REST API** |
-| **Network Protocol** | Dedicated storage network (SCSI block) | Network File System (NFSv4 / Port 2049) | REST API over HTTPS (Port 443) |
-| **Latency** | **< 1 millisecond** (ultra-low latency) | ~3–5 milliseconds | ~50–100 milliseconds |
-| **Durability** | 99.8% – 99.999% volume durability | 99.999999999% (11 9's) | **99.999999999% (11 9's durability)** |
-| **Boot Drive Capability** | **YES (Required for EC2 OS boot)** | NO (Cannot boot an OS from EFS) | NO (Cannot boot an OS from S3) |
-| **Volume / Tier Types** | `gp3` (General Purpose), `io2` (High IOPS), `st1` (HDD) | General Purpose, Max I/O, EFS One Zone | Standard, Intelligent-Tiering, Standard-IA, Glacier |
-| **Decision Trigger** | OS root drive; high-speed transactional SQL database storage. | Shared web uploads (WordPress `wp-content`), distributed CMS, shared media. | Static website hosting, documents, videos, backups, data lakes, ML datasets. |
-
-### S3 Security & HTTPS Enforced Policy
-In enterprise production, you must enforce HTTPS encryption in transit by attaching a JSON Bucket Policy:
-```json
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Sid": "EnforceTLSRequestsOnly",
-      "Effect": "Deny",
-      "Principal": "*",
-      "Action": "s3:*",
-      "Resource": [
-        "arn:aws:s3:::my-production-bucket",
-        "arn:aws:s3:::my-production-bucket/*"
-      ],
-      "Condition": {
-        "Bool": {
-          "aws:SecureTransport": "false"
-        }
-      }
-    }
-  ]
-}
-```
+### The Core Intuition & Everyday Metaphors:
+- **Amazon EBS = The Internal Hard Drive / Personal Lockable Desk Drawer:**  
+  Bolted directly into one computer. You control the lock and the file system. Raw blocks, maximum speed.
+- **Amazon EFS = The Shared Office Network Attached Storage (NAS) / Google Drive Folder:**  
+  A centralized file server that 100 employees across multiple office branches can open, read, and write to simultaneously over the local network.
+- **Amazon S3 = The Infinite Global Shipping Depot / Public Warehouse Locker:**  
+  Store cargo containers of any size via HTTP web URLs. Accessible anywhere on Earth, virtually indestructible (11 9's durability).
 
 ---
 
-## 🗄️ 3. AWS Databases & In-Memory Caching: When to Use Which One
+### Deep Dive: EBS (Block) vs EFS (File) — The 4 Crucial Differences
+
+#### 1. How Data is Stored and Modified
+- **EBS (Block-Level Storage):** The storage service sees your data **only as raw, unformatted chunks called blocks**, each assigned a unique sector address.  
+  > 💡 **The "Aha!" Classroom Moment:**  
+  > When you edit a single word in a 1 GB video file or a massive SQL database table, the operating system **only rewrites the tiny 4 KB block** containing that changed word! It does NOT re-upload or touch the remaining 999.99 MB.
+- **EFS (File-Level Storage):** The storage system manages the entire directory tree of folders, files, and metadata (file names, owner permissions, access times). Every read or write must follow network POSIX file-locking semantics.
+
+#### 2. Who Controls the File System?
+- **EBS (You are in charge):** AWS gives you a blank, unformatted block device (e.g. `/dev/xvdf`). You must choose and format it with an OS filesystem (`mkfs -t ext4` or `xfs` in Linux, `NTFS` in Windows) before creating directories.
+- **EFS (AWS is in charge):** AWS provides a fully managed, pre-formatted Linux Network File System (NFSv4). You simply mount it (`sudo mount -t efs fs-xxxx:/ /mnt/shared`), and it is immediately ready to store files. *(Note: EFS is Linux POSIX compliant; it does not natively support Windows EC2 instances).*
+
+#### 3. Speed vs Network Overhead
+- **EBS (Ultra-Low Latency):** Connects to the EC2 hypervisor via dedicated high-speed storage buses with **sub-millisecond (< 1 ms)** latency. This makes EBS mandatory for high-IOPS transactional databases (PostgreSQL, MySQL, MongoDB).
+- **EFS (Network File Locking Overhead):** Because multiple EC2 servers access the exact same files simultaneously, EFS must coordinate distributed file locks to prevent race conditions. This network synchronization adds a slight overhead (**~3–5 ms latency**).
+
+#### 4. Capacity & Pricing Model
+- **EBS (Pre-Allocated Fixed Disk):** You choose a fixed volume size (e.g., 100 GB `gp3`). **You pay for all 100 GB every month**, even if you only store 5 GB of actual files!
+- **EFS (Elastic Pay-as-you-Go):** Truly elastic. You do not pre-allocate size. If you store 5 GB today, you pay for 5 GB. If your users upload 500 GB tomorrow, it expands automatically, and when files are deleted, your bill shrinks immediately.
+
+---
+
+### 🏢 Real-World Architecture: How EBS, EFS & S3 Work Together
+#### Example: High-Availability Multi-AZ WordPress Fleet
+
+```
+                        [ Internet Traffic via Route 53 ]
+                                       │
+                                       ▼
+                       [ Application Load Balancer (ALB) ]
+                                       │
+             ┌─────────────────────────┴─────────────────────────┐
+             ▼                                                   ▼
+┌─────────────────────────┐                         ┌─────────────────────────┐
+│ EC2 Instance 1 (AZ-1)   │                         │ EC2 Instance 2 (AZ-2)   │
+│ ┌─────────────────────┐ │                         │ ┌─────────────────────┐ │
+│ │  EBS Root Volume    │ │                         │ │  EBS Root Volume    │ │
+│ │  (OS & Nginx / PHP) │ │                         │ │  (OS & Nginx / PHP) │ │
+│ └─────────────────────┘ │                         │ └─────────────────────┘ │
+└────────────┬────────────┘                         └────────────┬────────────┘
+             │                                                   │
+             │           Mounted Concurrently via NFS            │
+             └─────────────────────────┬─────────────────────────┘
+                                       ▼
+                      ┌─────────────────────────────────┐
+                      │    Amazon EFS Shared Storage    │
+                      │  (/var/www/html/wp-content/     │
+                      │   uploads - Images & Media)     │
+                      └─────────────────────────────────┘
+                                       │
+                                       ▼
+                      ┌─────────────────────────────────┐
+                      │   Amazon RDS Multi-AZ Database  │
+                      │   (Stores Blog Posts & Users)   │
+                      └─────────────────────────────────┘
+                                       │
+                                       ▼
+                      ┌─────────────────────────────────┐
+                      │     Amazon S3 Object Bucket     │
+                      │   (Daily Backups & CloudFront)  │
+                      └─────────────────────────────────┘
+```
+
+1. **Amazon EBS:** Attached to each EC2 instance as the private root volume (`/dev/xvda`). Houses the Ubuntu OS, Nginx binaries, and PHP-FPM runtime. Fast, local, private.
+2. **Amazon EFS:** Mounted across both EC2 instances simultaneously at `/var/www/html/wp-content/uploads`. When a visitor in AZ-1 uploads an image, the image is immediately readable by AZ-2!
+3. **Amazon RDS:** Houses the relational database tables (blog articles, user logins, comments) with automatic Multi-AZ failover.
+4. **Amazon S3:** Serves as the backup destination for nightly database snapshots and archives static CSS/JS assets distributed globally via Amazon CloudFront CDN.
+
+---
+
+## 🪣 3. Amazon S3 Storage Tiers Deep Dive: When to Use Which One
+
+Amazon S3 offers **7 specialized storage tiers** engineered to balance access speed, retrieval costs, and storage price per gigabyte:
+
+```
+    Frequent Access                                           Archive & Compliance
+    (Higher Storage Cost / $0 Retrieval Fee)                 (Lowest Storage Cost / Retrieval Fee)
+    ┌──────────────┬──────────────────┬──────────────┬──────────────┬──────────────────┬──────────────┐
+    │ S3 Standard  │ Intelligent-Tier │ Standard-IA  │ One Zone-IA  │ Glacier Instant  │ Deep Archive │
+    │ (Hot Data)   │ (Auto-Pilot AI)  │ (Warm Data)  │ (2nd Backup) │ (Quarterly Pull) │ (7-10 Years) │
+    └──────────────┴──────────────────┴──────────────┴──────────────┴──────────────────┴──────────────┘
+```
+
+| Storage Class | Availability & Durability | Min Duration | Retrieval Speed | Best Use Cases & Decision Trigger |
+| :--- | :--- | :--- | :--- | :--- |
+| **S3 Standard** | 99.99% Availability<br/>**11 9's Durability (3+ AZs)** | None | **Milliseconds** (Instant) | **Hot, frequently accessed data:** Active website assets, dynamic application files, user profile pictures. No retrieval fee. |
+| **S3 Intelligent-Tiering** | 99.9% Availability<br/>**11 9's Durability (3+ AZs)** | 30 Days | **Milliseconds** (Instant) | **Unknown or unpredictable access patterns.** Automatically moves objects between Frequent, Infrequent, and Archive tiers based on usage with **zero retrieval fees**! |
+| **S3 Standard-IA** *(Infrequent Access)* | 99.9% Availability<br/>**11 9's Durability (3+ AZs)** | 30 Days | **Milliseconds** (Instant) | **Warm data accessed less than once a month:** Disaster recovery backups, older customer receipts. Lower storage fee (\$0.0125/GB), but carries a small retrieval fee per GB. |
+| **S3 One Zone-IA** | 99.5% Availability<br/>**11 9's in 1 AZ ONLY** | 30 Days | **Milliseconds** (Instant) | **Secondary reproducible copies:** Stored in only 1 AZ (20% cheaper than Standard-IA). If the AZ is destroyed, data is lost. Ideal for image thumbnails or secondary offsite backups. |
+| **S3 Glacier Instant Retrieval** | 99.9% Availability<br/>**11 9's Durability (3+ AZs)** | 90 Days | **Milliseconds** (Instant) | **Rarely accessed archive data requiring immediate millisecond viewing:** Medical records, quarterly compliance reports. 68% cheaper than Standard-IA. |
+| **S3 Glacier Flexible Retrieval** | 99.9% Availability<br/>**11 9's Durability (3+ AZs)** | 90 Days | **Expedited: 1–5 min<br/>Standard: 3–5 hours<br/>Bulk: 5–12 hours** | **Traditional cold archives:** Historical database dumps, raw log files, legacy backups accessed 1–2 times per year. |
+| **S3 Glacier Deep Archive** | 99.9% Availability<br/>**11 9's Durability (3+ AZs)** | 180 Days | **Standard: 12 hours<br/>Bulk: 48 hours** | **The lowest-cost cloud storage on Earth (\$0.00099/GB/mo):** Long-term regulatory compliance (7–10 year financial or healthcare retention). Retaining 1 TB costs just \$1.00 per month! |
+
+### S3 Lifecycle Rules: Automatic Cost Optimization Pipeline
+Rather than manually migrating files, you define an automated JSON/Console Lifecycle Rule:
+- **Day 0:** Object uploaded to **S3 Standard** (Hot user access).
+- **Day 30:** Transition to **S3 Standard-IA** (User access slows down).
+- **Day 90:** Transition to **S3 Glacier Flexible Retrieval** (Cold archive).
+- **Day 365:** Transition to **S3 Glacier Deep Archive** (Regulatory compliance).
+- **Day 2555 (7 Years):** Automatically delete / expire object.
+
+---
+
+## 🗄️ 4. AWS Databases & In-Memory Caching: When to Use Which One
 
 ![Database Decision Matrix](file:///e:/trainer/task/module_03_aws_core/notes/diagrams/05_database_decision_matrix.png)
 
@@ -150,7 +223,7 @@ In enterprise production, you must enforce HTTPS encryption in transit by attach
 
 ---
 
-## 🏗️ 4. Bridge to Module 04: Infrastructure as Code (IaC) with CloudFormation
+## 🏗️ 5. Bridge to Module 04: Infrastructure as Code (IaC) with CloudFormation
 
 ### Why Infrastructure as Code (IaC) Beats "ClickOps"?
 1. **Repeatability:** Deploy an entire 3-tier architecture across 5 AWS regions in 5 minutes with zero human configuration errors.
@@ -204,7 +277,7 @@ Outputs:
 
 ---
 
-## 🛡️ 5. Student Zero-Dollar Sunset Checklist
+## 🛡️ 6. Student Zero-Dollar Sunset Checklist
 
 Every student must complete this checklist before closing their AWS console:
 1. **Stop or Terminate** all practice EC2 instances.

@@ -102,8 +102,6 @@ $$2^{(32 - 24)} - 5 = 256 - 5 = 251 \text{ usable IPs}$$
 
 ## 🛡️ 4. Firewalls: Security Groups (Stateful) vs Network ACLs (Stateless)
 
-![Security Groups vs NACLs](file:///e:/trainer/task/module_03_aws_core/notes/diagrams/01_vpc_networking_architecture.png)
-
 ```
 Incoming Packet
        │
@@ -156,7 +154,67 @@ The resolver IP is **always located at the 2nd usable IP of the VPC CIDR base**:
 
 ---
 
-## 🏷️ 6. IP Addressing Comparison: Private IP vs Public IP vs Elastic IP
+## 🌐 6. Public DNS vs Private DNS in Route 53
+
+Students frequently ask: *"Sir, what is the exact difference between a Public Hosted Zone and a Private Hosted Zone in Route 53?"*
+
+| Metric | Public Hosted Zone (Route 53) | Private Hosted Zone (Route 53) |
+| :--- | :--- | :--- |
+| **Everyday Metaphor** | **The Global Public Yellow Pages Telephone Directory** | **The Company's Internal Confidential Intercom Directory** |
+| **Accessibility** | Accessible by **anyone on the global internet** worldwide. | Accessible **ONLY by resources inside the VPCs** linked to the zone. |
+| **Resolution Target** | Public domain names (e.g. `mycompany.com`, `api.mycompany.com`). | Internal private names (e.g. `db.internal`, `auth.vpc.local`). |
+| **Resolved IP Type** | Resolves to **Public IPv4/IPv6 addresses**, CloudFront CDN distributions, or ALBs. | Resolves to **Private RFC 1918 IPs** (e.g. `10.0.2.50`, `10.0.3.100`). |
+| **Visibility / Privacy** | DNS query results are public and visible to hackers running `dig` or `nslookup`. | **100% Invisible to the outside internet.** External queries return `NXDOMAIN` (non-existent domain). |
+| **Use Case** | Serving public end-users visiting your website or mobile application. | Internal microservice-to-microservice communication and database connections without hardcoding private IPs. |
+
+---
+
+## 🔒 7. How HTTPS Works Under the Hood (The Titanium Security Briefcase)
+
+### The Analogy:
+- **Plain HTTP (Port 80):** Like sending a postcard through the mail. Every postal worker, delivery boy, and bystander on coffee shop Wi-Fi can read your passwords, credit cards, and session cookies in clear text!
+- **HTTPS (Port 443):** Like locking your letter inside a **tamper-proof titanium security briefcase** with a dual-key cryptographic lock. Even if an attacker intercepts the briefcase, all they see is scrambled gibberish!
+
+### The SSL/TLS Handshake Step-by-Step:
+
+```
+[ Browser / Client ]                                   [ AWS ALB / Web Server ]
+         │                                                        │
+         │ 1. Client Hello (Supported TLS versions & Ciphers)    │
+         ├───────────────────────────────────────────────────────►│
+         │                                                        │
+         │ 2. Server Hello + TLS Certificate (Contains Public Key)│
+         │◄───────────────────────────────────────────────────────┤
+         │                                                        │
+         │ 3. Browser verifies Certificate with Trusted Root CA  │
+         │    (Locks briefcase using Server's Public Key)         │
+         │                                                        │
+         │ 4. Client Key Exchange: Sends Encrypted Session Key    │
+         ├───────────────────────────────────────────────────────►│
+         │                                                        │ 5. Server decrypts Session Key
+         │                                                        │    using its secret Private Key!
+         │                                                        │
+         │◄══════════════════════════════════════════════════════►│
+         │ 6. Fast Symmetric AES Encryption Established!         │
+         │    All HTTP payloads, headers & cookies are encrypted  │
+```
+
+1. **Step 1: Client Hello:** The client browser contacts the server on **Port 443** and shares supported cryptographic standards (e.g., TLS 1.3, AES-GCM).
+2. **Step 2: Server Hello & Certificate:** The server responds with its chosen cipher and its **Digital Certificate** (issued by a trusted Certificate Authority like AWS Certificate Manager or Let's Encrypt). This certificate contains the server's **Public Key**.
+3. **Step 3: Verification:** The browser verifies the CA digital signature against its built-in operating system trust store. If valid, the padlock icon appears green.
+4. **Step 4: Session Key Generation & Exchange:** The browser generates a unique, temporary **Symmetric Session Key** (for fast data encryption). It encrypts this key using the server's **Public Key** and transmits it.
+5. **Step 5: Server Decryption:** Only the server possesses the corresponding secret **Private Key**. It decrypts the message and extracts the session key.
+6. **Step 6: Secure Channel:** Now both sides share the secret session key. All further communication is encrypted using ultra-fast symmetric encryption.
+
+### TLS Termination at the Application Load Balancer (ALB):
+In AWS production architectures, we do **TLS Termination** at the ALB:
+- **AWS Certificate Manager (ACM):** Provisions free, auto-renewing SSL/TLS certificates.
+- **ALB Handles Encryption:** The ALB terminates HTTPS on Port 443, decrypts the traffic, inspects HTTP URL path routing rules, and forwards plain HTTP (Port 80) across the private VPC subnets to the backend EC2 fleet.
+- **Benefit:** Removes heavy cryptographic encryption/decryption overhead from backend EC2 servers, allowing 100% of their CPU to serve business application code!
+
+---
+
+## 🏷️ 8. IP Addressing Comparison: Private IP vs Public IP vs Elastic IP
 
 | Property | Private IPv4 | Public IPv4 | Elastic IP (EIP) |
 | :--- | :--- | :--- | :--- |
@@ -168,7 +226,7 @@ The resolver IP is **always located at the 2nd usable IP of the VPC CIDR base**:
 
 ---
 
-## ⚖️ 7. Elastic Load Balancing: ALB vs NLB
+## ⚖️ 9. Elastic Load Balancing: ALB vs NLB
 
 | Metric | Application Load Balancer (ALB) | Network Load Balancer (NLB) |
 | :--- | :--- | :--- |
@@ -181,7 +239,7 @@ The resolver IP is **always located at the 2nd usable IP of the VPC CIDR base**:
 
 ---
 
-## 🏢 8. Production 3-Tier Enterprise Web Architecture Pattern
+## 🏢 10. Production 3-Tier Enterprise Web Architecture Pattern
 
 ```
                   [ Public Internet Users ]
