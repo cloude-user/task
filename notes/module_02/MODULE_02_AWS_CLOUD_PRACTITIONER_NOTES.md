@@ -221,4 +221,40 @@ To prevent accidental billing while practicing on AWS, every student must set up
 * **Hosting on Amazon S3:** Serverless static hosting. You upload your HTML/CSS/JS files to an S3 bucket, enable *Static Website Hosting*, and AWS serves your site globally with zero servers to manage or patch!
 
 ---
+
+## 5. How to Navigate the AWS Management Console (Visual Walkthrough)
+
+Understanding the AWS Console layout is essential for every cloud developer. Below is the master navigation blueprint:
+
+![AWS Console Navigation Blueprint](diagrams/01_aws_console_navigation_guide.png)
+
+### The 4 Essential Top-Bar Controls:
+
+1. **Global Search Bar (`Alt + S`):**
+   * The fastest way to find any service, documentation, or resource.
+   * Type `EC2`, `S3`, `VPC`, `WAF`, or `Budgets` and press `Enter` to jump directly to the service dashboard.
+2. **Region Selector (Top Right):**
+   * **Crucial Rule:** Always verify that you are operating in **Asia Pacific (Mumbai) `ap-south-1`** before creating instances or VPCs. If you create an EC2 instance in `us-east-1` (N. Virginia), you will not see it when looking at the Mumbai console!
+   * *Note:* Global services like **IAM**, **Route 53**, and **CloudFront** automatically set the region to **Global**.
+3. **AWS CloudShell (`>_` Icon):**
+   * A browser-based Linux terminal pre-authenticated with your AWS credentials and with the AWS CLI, Python, Node.js, and Git already installed!
+4. **Account & Security Dropdown:**
+   * Shows your 12-digit AWS Account ID.
+   * Direct link to **Security credentials** (assigning MFA, rotating access keys) and **Billing and Cost Management**.
+
+---
+
+### Step-by-Step Navigation Paths for Key Services
+
+| Service | Quick Search Shortcut | Direct Menu Path | What to Check First |
+|---|---|---|---|
+| **AWS IAM** | Type `IAM` in search | Services -> Security, Identity, & Compliance -> IAM | Verify Root MFA is active; use IAM users |
+| **AWS Budgets** | Type `Budgets` in search | Services -> Cloud Financial Management -> AWS Budgets | Confirm Zero-Spend and $5 alarms are green |
+| **Amazon EC2** | Type `EC2` in search | Services -> Compute -> EC2 | Verify Region is `ap-south-1` before launching |
+| **Amazon S3** | Type `S3` in search | Services -> Storage -> S3 | Remember: S3 bucket names are globally unique |
+| **Amazon VPC** | Type `VPC` in search | Services -> Networking & Content Delivery -> VPC | Check CIDR block `10.0.0.0/16` and subnets |
+| **AWS WAF** | Type `WAF` in search | Services -> Security, Identity, & Compliance -> WAF & Shield | Check Web ACL scope (Global vs Regional) |
+| **Amazon CloudFront** | Type `CloudFront` in search | Services -> Networking & Content Delivery -> CloudFront | Verify Distribution status shows `Enabled` |
+
+---
 *Created for TASK Telangana Cloud Software Developer Batch · Module 2 Notes*

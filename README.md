@@ -50,9 +50,9 @@ task/
 ## 🚀 Quick Navigation
 
 ### 1. Theory Notes (`notes/`)
-* **Module 1 (Python & JS):** [MODULE_01_PYTHON_AND_JAVASCRIPT_MASTER_NOTES.md](notes/module_01/MODULE_01_PYTHON_AND_JAVASCRIPT_MASTER_NOTES.md) | [PDF Handbook](notes/module_01/Module_01_Python_and_JavaScript_Master_Handbook.pdf)
+* **Module 1 (Python & JS):** [MODULE_01_PYTHON_AND_JAVASCRIPT_MASTER_NOTES.md](notes/module_01/MODULE_01_PYTHON_AND_JAVASCRIPT_MASTER_NOTES.md) | [PDF Handbook](notes/module_01/Module_01_Python_and_JavaScript_Master_Handbook.pdf) | [Interactive Notebooks](lab_sheet/module_01/notebooks/)
 * **Module 2 (Cloud Practitioner):** [MODULE_02_AWS_CLOUD_PRACTITIONER_NOTES.md](notes/module_02/MODULE_02_AWS_CLOUD_PRACTITIONER_NOTES.md) | [PDF Guide](notes/module_02/Module_02_AWS_Cloud_Practitioner_Master_Guide.pdf)
-* **Module 3 (AWS Core):** [MODULE_03_AWS_CORE_STUDENT_NOTES.md](notes/module_03/MODULE_03_AWS_CORE_STUDENT_NOTES.md) | [VPC Master Guide PDF](notes/module_03/Module_03_Part_A_VPC_and_Networking_Master_Guide.pdf)
+* **Module 3 (AWS Core):** [MODULE_03_AWS_CORE_STUDENT_NOTES.md](notes/module_03/MODULE_03_AWS_CORE_STUDENT_NOTES.md) | [WAF & CloudFront Architecture Guide](notes/module_03/MODULE_03_PART_C_WAF_AND_CLOUDFRONT_MASTER_NOTES.md) | [VPC Master Guide PDF](notes/module_03/Module_03_Part_A_VPC_and_Networking_Master_Guide.pdf)
 
 ### 2. Hands-on Lab Sheets (`lab_sheet/`)
 * **Lab 1.1:** [Python Foundations & JSON Parser](lab_sheet/module_01/01_python_programming_fundamentals_lab.md)
