@@ -1,0 +1,208 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: >
+  TASK Telangana Cloud Software Developer Batch (Nalgonda Center)
+  Trainer: Sundeep Hiremat
+  Production-Ready AWS S3 Enterprise Bucket CloudFormation Template.
+  Features: Parameterized Environment, Versioning, Server-Side Encryption (AES256),
+  Tiered Storage Lifecycle Rules (Standard-IA -> Glacier -> Expiration),
+  Comprehensive Public Access Block, CORS, and HTTPS-Only Enforcing Bucket Policy.
+
+# ==============================================================================
+# SECTION 1: PARAMETERS (Customizable inputs passed in at stack creation time)
+# ==============================================================================
+Parameters:
+  EnvironmentName:
+    Type: String
+    Default: dev
+    AllowedValues:
+      - dev
+      - staging
+      - prod
+    Description: Select the deployment environment tier (dev, staging, prod).
+
+  BucketBaseName:
+    Type: String
+    Default: task-nalgonda
+    AllowedPattern: '^[a-z0-9][a-z0-9-]*[a-z0-9]$'
+    MinLength: 3
+    MaxLength: 30
+    ConstraintDescription: Must contain only lowercase letters, numbers, and hyphens. Cannot start or end with a hyphen.
+    Description: Unique prefix for the S3 bucket. Global uniqueness will be guaranteed by appending Account ID and Region.
+
+  EnableVersioning:
+    Type: String
+    Default: Enabled
+    AllowedValues:
+      - Enabled
+      - Suspended
+    Description: Enable S3 object versioning for data protection and accidental deletion recovery.
+
+  TransitionToStandardIADays:
+    Type: Number
+    Default: 30
+    MinValue: 30
+    MaxValue: 365
+    Description: Number of days before moving active objects to lower-cost Standard-IA (Infrequent Access) storage tier.
+
+  TransitionToGlacierDays:
+    Type: Number
+    Default: 90
+    MinValue: 90
+    MaxValue: 1095
+    Description: Number of days before moving objects to low-cost Glacier cold archive storage tier.
+
+  ObjectExpirationDays:
+    Type: Number
+    Default: 365
+    MinValue: 120
+    MaxValue: 3650
+    Description: Number of days after which objects are permanently expired and deleted.
+
+# ==============================================================================
+# SECTION 2: METADATA (Organizes parameter display groups in the AWS Console GUI)
+# ==============================================================================
+Metadata:
+  AWS::CloudFormation::Interface:
+    ParameterGroups:
+      - Label:
+          default: "1. Core Bucket Identity & Environment"
+        Parameters:
+          - EnvironmentName
+          - BucketBaseName
+          - EnableVersioning
+      - Label:
+          default: "2. Automated Lifecycle & Cost Optimization"
+        Parameters:
+          - TransitionToStandardIADays
+          - TransitionToGlacierDays
+          - ObjectExpirationDays
+
+# ==============================================================================
+# SECTION 3: RESOURCES (The actual AWS components provisioned by CloudFormation)
+# ==============================================================================
+Resources:
+
+  # ----------------------------------------------------------------------------
+  # Resource 1: The Production Enterprise S3 Storage Bucket
+  # ----------------------------------------------------------------------------
+  EnterpriseS3Bucket:
+    Type: AWS::S3::Bucket
+    DeletionPolicy: Delete
+    UpdateReplacePolicy: Retain
+    Properties:
+      # S3 bucket names must be globally unique across all AWS accounts worldwide.
+      # By combining base name + environment + 12-digit Account ID + Region, collision is impossible.
+      BucketName: !Sub '${BucketBaseName}-${EnvironmentName}-${AWS::AccountId}-${AWS::Region}'
+
+      # S3 Object Versioning: Keeps historical revisions of objects
+      VersioningConfiguration:
+        Status: !Ref EnableVersioning
+
+      # Enterprise Server-Side Encryption (SSE-S3): Transparent AES256 encryption at rest
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault:
+              SSEAlgorithm: AES256
+            BucketKeyEnabled: true
+
+      # S3 Block Public Access: Enforces ironclad private security boundaries
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        IgnorePublicAcls: true
+        BlockPublicPolicy: true
+        RestrictPublicBuckets: true
+
+      # Automated Lifecycle Configuration: Tiered storage progression to slash AWS costs
+      LifecycleConfiguration:
+        Rules:
+          - Id: TieredCostOptimizationRule
+            Status: Enabled
+            # Transition active current objects to cheaper storage tiers
+            Transitions:
+              - TransitionInDays: !Ref TransitionToStandardIADays
+                StorageClass: STANDARD_IA
+              - TransitionInDays: !Ref TransitionToGlacierDays
+                StorageClass: GLACIER
+            # Permanently delete expired objects
+            ExpirationInDays: !Ref ObjectExpirationDays
+            # Clean up old noncurrent versions to avoid ghost storage costs
+            NoncurrentVersionTransitions:
+              - TransitionInDays: 30
+                StorageClass: GLACIER
+            NoncurrentVersionExpiration:
+              NoncurrentDays: 90
+            # Abort failed multipart uploads after 7 days to free up orphan blocks
+            AbortIncompleteMultipartUpload:
+              DaysAfterInitiation: 7
+
+      # Cross-Origin Resource Sharing (CORS): Allows frontend web clients to fetch assets
+      CorsConfiguration:
+        CorsRules:
+          - AllowedHeaders:
+              - '*'
+            AllowedMethods:
+              - GET
+              - HEAD
+            AllowedOrigins:
+              - '*'
+            MaxAge: 3000
+
+      # Governance & Resource Accounting Tags
+      Tags:
+        - Key: Project
+          Value: TASK-Cloud-Software-Developer
+        - Key: Environment
+          Value: !Ref EnvironmentName
+        - Key: ManagedBy
+          Value: AWS-CloudFormation
+        - Key: Trainer
+          Value: Sundeep-Hiremat
+        - Key: TrainingCenter
+          Value: Nalgonda-Center
+
+  # ----------------------------------------------------------------------------
+  # Resource 2: Enterprise S3 Bucket Policy (Enforce HTTPS / TLS 1.2+ Only)
+  # ----------------------------------------------------------------------------
+  EnforceHTTPSBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref EnterpriseS3Bucket
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Sid: EnforceSecureTransportOnly
+            Effect: Deny
+            Principal: '*'
+            Action: 's3:*'
+            Resource:
+              - !GetAtt EnterpriseS3Bucket.Arn
+              - !Sub '${EnterpriseS3Bucket.Arn}/*'
+            Condition:
+              Bool:
+                aws:SecureTransport: 'false'
+
+# ==============================================================================
+# SECTION 4: OUTPUTS (Values displayed in the console and exportable to other stacks)
+# ==============================================================================
+Outputs:
+  BucketName:
+    Description: The globally unique name of the created S3 bucket
+    Value: !Ref EnterpriseS3Bucket
+    Export:
+      Name: !Sub '${AWS::StackName}-BucketName'
+
+  BucketArn:
+    Description: The Amazon Resource Name (ARN) of the created S3 bucket
+    Value: !GetAtt EnterpriseS3Bucket.Arn
+    Export:
+      Name: !Sub '${AWS::StackName}-BucketArn'
+
+  BucketRegionalDomainName:
+    Description: The regional DNS domain name for direct AWS application integration
+    Value: !GetAtt EnterpriseS3Bucket.RegionalDomainName
+    Export:
+      Name: !Sub '${AWS::StackName}-RegionalDomain'
+
+  BucketSecureURL:
+    Description: The secure HTTPS endpoint for accessing this bucket
+    Value: !Sub 'https://${EnterpriseS3Bucket}.s3.${AWS::Region}.amazonaws.com'

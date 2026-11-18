@@ -1,0 +1,81 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: >
+  TASK Telangana Cloud Software Developer Batch (Nalgonda Center)
+  Trainer: Sundeep Hiremat
+  AWS S3 Static Website & Portfolio Hosting CloudFormation Template.
+  Features: Website Configuration (index.html & error.html), Public Read Access Policy,
+  CORS for Web Assets, and WebsiteURL Endpoint Output.
+
+Parameters:
+  WebsiteBucketPrefix:
+    Type: String
+    Default: portfolio-site
+    AllowedPattern: '^[a-z0-9][a-z0-9-]*[a-z0-9]$'
+    Description: Prefix for static website bucket. S3 bucket names must be globally unique.
+
+Resources:
+
+  # 1. The S3 Static Website Bucket
+  StaticWebsiteBucket:
+    Type: AWS::S3::Bucket
+    DeletionPolicy: Delete
+    Properties:
+      BucketName: !Sub '${WebsiteBucketPrefix}-${AWS::AccountId}-${AWS::Region}'
+      # Configure website hosting properties
+      WebsiteConfiguration:
+        IndexDocument: index.html
+        ErrorDocument: error.html
+
+      # For a public website, we disable BlockPublicPolicy & BlockPublicAcls
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: false
+        IgnorePublicAcls: false
+        BlockPublicPolicy: false
+        RestrictPublicBuckets: false
+
+      # CORS Configuration to allow fonts and icons to render
+      CorsConfiguration:
+        CorsRules:
+          - AllowedHeaders:
+              - '*'
+            AllowedMethods:
+              - GET
+              - HEAD
+            AllowedOrigins:
+              - '*'
+            MaxAge: 3600
+
+      Tags:
+        - Key: Purpose
+          Value: Static-Website-Hosting
+        - Key: ManagedBy
+          Value: AWS-CloudFormation
+        - Key: Trainer
+          Value: Sundeep-Hiremat
+
+  # 2. Public Read Bucket Policy (Allow Anyone Worldwide to Read Website Assets)
+  PublicWebsiteBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref StaticWebsiteBucket
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Sid: PublicReadForWebsiteObjects
+            Effect: Allow
+            Principal: '*'
+            Action: 's3:GetObject'
+            Resource: !Sub '${StaticWebsiteBucket.Arn}/*'
+
+Outputs:
+  WebsiteURL:
+    Description: Direct Public HTTP Website Endpoint for the Portfolio
+    Value: !GetAtt StaticWebsiteBucket.WebsiteURL
+
+  BucketName:
+    Description: Created Website Bucket Name
+    Value: !Ref StaticWebsiteBucket
+
+  BucketArn:
+    Description: Created Website Bucket ARN
+    Value: !GetAtt StaticWebsiteBucket.Arn

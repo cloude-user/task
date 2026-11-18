@@ -240,39 +240,44 @@ def create_deck(output_path):
     ], card_bg=RGBColor(0xEA, 0xFA, 0xEA))
 
     # =================================================================
-    # SLIDE 3: The Grand Vehicle Metaphor (The Anchor)
+    # SLIDE 3: The Grand Tollywood & Kirana Shop Metaphors (The Anchor)
     # =================================================================
     s3 = prs.slides.add_slide(blank_layout)
-    add_header(s3, "The Grand Vehicle Metaphor: The Cloud as an Automobile Fleet", "DAY 1")
+    add_header(s3, "The Master Metaphors: Tollywood Cinema & Telangana Kirana Shop", "DAY 1")
     add_footer(s3, 3, 30)
 
-    add_card(s3, 0.8, 1.5, 2.7, 5.2, "EC2 = Rental Car", [
-        "Rent an engine on-demand.",
-        "AMI = Car Blueprint (Ubuntu/Linux).",
-        "Instance Type = Horsepower (t3.micro).",
-        "Key Pair = Physical ignition key.",
-        "User Data = Pre-ignition accessories."
+    add_card(s3, 0.8, 1.5, 2.7, 5.2, "EC2 = Shooting Fleet", [
+        "Tollywood Transport Fleet:",
+        "• t3/m5 = Hero's Everyday City Swift.",
+        "• c5 = Action Chase Sports Car.",
+        "• r5 = 100-Member Wedding Dance Bus (RAM for Redis).",
+        "• i3 = 10-Ton Heavy Goods Lorry (NVMe).",
+        "• p4 = Bahubali/RRR VFX Supercomputer.",
+        "Key Pair = Physical ignition key."
     ], card_bg=RGBColor(0xEA, 0xF2, 0xF8))
 
-    add_card(s3, 3.8, 1.5, 2.7, 5.2, "EBS = Car Trunk", [
-        "Personal hard drive bolted to 1 car.",
-        "High speed local block storage.",
-        "Luggage stays safe when car stops.",
-        "Snapshot = Backup copy sent to central warehouse."
+    add_card(s3, 3.8, 1.5, 2.7, 5.2, "EBS = Jeans Pocket", [
+        "Your Personal Lockable Pocket:",
+        "• Fast local block disk bolted to 1 car.",
+        "• 4 KB Block modification: Edit 1 word in 1 GB -> only 4 KB rewritten!",
+        "• Sub-millisecond latency (< 1 ms).",
+        "• Mandatory for OS root boot drive."
     ], card_bg=RGBColor(0xFE, 0xF9, 0xE7))
 
-    add_card(s3, 6.8, 1.5, 2.7, 5.2, "EFS = Fleet Cargo Rack", [
-        "Shared roof rack for 100+ cars.",
-        "All cars in different garages (AZs) access simultaneously.",
-        "NFS protocol: real-time updates."
+    add_card(s3, 6.8, 1.5, 2.7, 5.2, "EFS = Biryani Thali", [
+        "Shared Family Biryani Thali:",
+        "• Central buffet table for 100+ servers.",
+        "• All servers in different AZs access concurrently via NFS protocol.",
+        "• Network file locking overhead (~3-5 ms).",
+        "• Elastic: auto grows & shrinks."
     ], card_bg=RGBColor(0xEA, 0xFA, 0xEA))
 
-    add_card(s3, 9.8, 1.5, 2.7, 5.2, "S3 = Global Warehouse", [
-        "Infinite shipping depot outside the car.",
-        "Buckets = Storage bays.",
-        "Objects = Cargo boxes.",
-        "Reachable from any highway (HTTPS).",
-        "11 9's durability (practically indestructible)."
+    add_card(s3, 9.8, 1.5, 2.7, 5.2, "S3 = D-Mart Godown", [
+        "Shamshabad Central D-Mart Depot:",
+        "• Infinite cloud warehouse via HTTPS.",
+        "• 11 9's durability (indestructible).",
+        "• 7 Storage Tiers from Standard to Deep Archive (Rs. 80 / TB / month!).",
+        "• Block Public Access (BPA) security."
     ], card_bg=RGBColor(0xFD, 0xED, 0xEC))
 
     # =================================================================
@@ -479,34 +484,38 @@ def create_deck(output_path):
     # SLIDE 10: Storage Shootout: EBS vs EFS vs S3
     # =================================================================
     s10 = prs.slides.add_slide(blank_layout)
-    add_header(s10, "Storage Shootout: Block (EBS) vs File (EFS) vs Object (S3)", "DAY 1")
+    add_header(s10, "Storage Shootout: Pocket (EBS) vs Biryani Thali (EFS) vs D-Mart (S3)", "DAY 1")
     add_footer(s10, 10, 30)
 
     add_card(s10, 0.8, 1.5, 3.6, 5.2, "Amazon EBS (Block)", [
-        "Analogy: Built-in Car Trunk",
-        "Scope: Bound to a SINGLE AZ.",
-        "Attachment: Mounted to 1 EC2 instance at a time (like a USB drive).",
-        "Protocol: Block-level (ext4, xfs, NTFS).",
-        "Speed: Ultra-low millisecond latency; high IOPS.",
-        "Best for: OS boot disks, databases (Postgres, MySQL)."
+        "Analogy: Your Personal Jeans Pocket",
+        "• Scope: Bound to SINGLE AZ.",
+        "• Attachment: 1 EC2 instance.",
+        "• Block-level: Edit 1 word in 1 GB -> only 4 KB block rewritten!",
+        "• You format filesystem (ext4 / XFS).",
+        "• Latency: < 1 ms (Sub-millisecond).",
+        "• Billing: Pre-allocated (Pay 100 GB even if 5 GB used).",
+        "• Best for: OS boot drives, SQL DBs."
     ], card_bg=RGBColor(0xFE, 0xF9, 0xE7))
 
     add_card(s10, 4.8, 1.5, 3.6, 5.2, "Amazon EFS (File)", [
-        "Analogy: Shared Fleet Roof Cargo",
-        "Scope: Regional (Multi-AZ automatically).",
-        "Attachment: Mounted by HUNDREDS of EC2 instances concurrently across AZs.",
-        "Protocol: Network File System (NFSv4). Standard folder hierarchy.",
-        "Scalability: Grows and shrinks automatically.",
-        "Best for: Shared web uploads, WordPress, CMS."
+        "Analogy: Family Biryani Thali",
+        "• Scope: Regional (Multi-AZ automatically).",
+        "• Attachment: 1000s of EC2s concurrently.",
+        "• File-level: AWS pre-formats NFSv4.",
+        "• Network file-locking overhead (~3-5 ms).",
+        "• Truly Elastic: Pay only for what you store.",
+        "• WordPress: /wp-content/uploads mounted across all web instances simultaneously!"
     ], card_bg=RGBColor(0xEA, 0xFA, 0xEA))
 
     add_card(s10, 8.8, 1.5, 3.7, 5.2, "Amazon S3 (Object)", [
-        "Analogy: Global Shipping Depot",
-        "Scope: Global web-accessible URL via HTTPS.",
-        "Attachment: NOT a disk drive; accessed via REST API / SDK / CLI.",
-        "Structure: Flat namespace (Buckets & Objects).",
-        "Durability: 99.999999999% (11 9's) across 3+ AZs.",
-        "Best for: Media files, datasets, backups."
+        "Analogy: Shamshabad D-Mart Godown",
+        "• Scope: Global web URL via HTTPS.",
+        "• Attachment: REST API (Not a disk).",
+        "• Flat namespace: Buckets & Keys.",
+        "• Durability: 99.999999999% (11 9's).",
+        "• 7 Storage Tiers: Standard to Deep Archive (Rs. 80 / TB / month).",
+        "• Best for: Images, videos, backups."
     ], card_bg=RGBColor(0xFD, 0xED, 0xEC))
 
     # =================================================================
@@ -554,35 +563,40 @@ def create_deck(output_path):
     # SLIDE 12: Database Decision Framework (RDS vs Aurora vs DynamoDB)
     # =================================================================
     s12 = prs.slides.add_slide(blank_layout)
-    add_header(s12, "Databases: RDS vs Aurora vs DynamoDB vs ElastiCache", "DAY 2")
+    add_header(s12, "Databases & Caching: The Kirana Shop & Box Office Models", "DAY 2")
     add_footer(s12, 12, 30)
 
     add_card(s12, 0.8, 1.5, 2.7, 5.2, "Amazon RDS (SQL)", [
-        "Engines: Postgres, MySQL, MariaDB, Oracle, SQL Server.",
-        "Multi-AZ: Synchronous standby in 2nd AZ for automatic failover.",
-        "Read Replicas: Up to 15 async read copies to offload read reports.",
-        "Managed: Automated daily backups, OS patching, minor version updates."
+        "Traditional Baddi Khatavahi Ledger:",
+        "• Engines: Postgres, MySQL, Oracle.",
+        "• Strict columns & rows; ACID transactions.",
+        "• Multi-AZ: Duplicate carbon-copy ledger at home for automatic failover.",
+        "• Read Replicas: Up to 15 copies to scale read queries.",
+        "• Automated OS patching & daily backups."
     ], card_bg=RGBColor(0xEA, 0xF2, 0xF8))
 
     add_card(s12, 3.8, 1.5, 2.7, 5.2, "Amazon Aurora", [
-        "Cloud-native PostgreSQL & MySQL compatible engine.",
-        "Architecture: 6-way replication of storage across 3 AZs.",
-        "Performance: 5x faster than MySQL, 3x faster than standard Postgres.",
-        "Aurora Serverless v2: Instant scaling from 0.5 to 128 ACUs in milliseconds!"
+        "D-Mart Barcode Billing System:",
+        "• 5x faster than MySQL, 3x faster Postgres.",
+        "• 6-way storage replication across 3 AZs.",
+        "• Auto-expands storage up to 128 TiB.",
+        "• Aurora Serverless v2: Instant auto-scaling for enterprise high-traffic SaaS."
     ], card_bg=RGBColor(0xFE, 0xF9, 0xE7))
 
     add_card(s12, 6.8, 1.5, 2.7, 5.2, "Amazon DynamoDB", [
-        "Fully managed, serverless NoSQL Key-Value & Document store.",
-        "Performance: Single-digit millisecond latency at any scale.",
-        "Primary Keys: Partition Key (PK) & Sort Key (SK).",
-        "Global Tables: Active-active multi-region replication."
+        "Swiggy / Zomato Live Token Counter:",
+        "• Serverless NoSQL (Key-Value / Document).",
+        "• Single-digit millisecond latency at any scale.",
+        "• Handles 10 lakh hungry fans ordering at the exact same second during IPL match!",
+        "• Partition Key (PK) & Sort Key (SK)."
     ], card_bg=RGBColor(0xEA, 0xFA, 0xEA))
 
     add_card(s12, 9.8, 1.5, 2.7, 5.2, "ElastiCache (Redis)", [
-        "In-Memory Caching engine.",
-        "Sub-millisecond response time by caching frequent SQL query results in RAM.",
-        "Data structures: Strings, hashes, lists, sets, sorted sets.",
-        "Ideal for user login session caches & real-time leaderboards."
+        "Kirana Counter Chillar Box & Tray:",
+        "• Microsecond response time in RAM.",
+        "• Sits in front of RDS (Cache-Aside).",
+        "• Eliminates slow repeated database queries.",
+        "• Stores user auth session tokens & live gaming leaderboards."
     ], card_bg=RGBColor(0xFD, 0xED, 0xEC))
 
     # =================================================================
@@ -617,114 +631,123 @@ def create_deck(output_path):
     ], is_bullet=False)
 
     # =================================================================
-    # SLIDE 14: Amazon VPC: Your Private Highway System
+    # SLIDE 14: Amazon VPC: Sandhya 70mm Multiplex Compound
     # =================================================================
     s14 = prs.slides.add_slide(blank_layout)
-    add_header(s14, "Amazon VPC: Your Isolated Private Highway System", "DAY 2")
+    add_header(s14, "Amazon VPC: The Sandhya 70mm Compound Analogy", "DAY 2")
     add_footer(s14, 14, 30)
 
     add_card(s14, 0.8, 1.5, 5.6, 5.2, "What is a VPC?", [
-        "A logically isolated section of the AWS Cloud where you launch AWS resources in a virtual network you define.",
-        "Vehicle Analogy: Your private gated business park / private racing circuit.",
-        "CIDR Block (Classless Inter-Domain Routing):",
-        "• Determines the IP address range for your entire private cloud.",
-        "• Standard Production Range: 10.0.0.0/16 (Yields 65,536 private IP addresses).",
-        "• AWS reserves 5 IP addresses in every subnet (.0 network, .1 router, .2 DNS, .3 reserved, .255 broadcast)."
+        "A logically isolated section of the AWS Cloud where you define your private network.",
+        "Tollywood Analogy: Sandhya 70mm Multiplex Compound Wall at RTC X Roads.",
+        "CIDR Block (10.0.0.0/16):",
+        "• Total theatre seating layout = 65,536 total seat plots.",
+        "The 5 AWS Reserved IPs in Every Subnet (Formula: 2^(32-Prefix) - 5):",
+        "• .0 = The Theatre Boundary Marker (Network Address).",
+        "• .1 = The Hall Gatekeeper (VPC Default Router).",
+        "• .2 = The Theatre Enquiry Counter (Amazon Route 53 DNS Resolver).",
+        "• .3 = Reserved VIP Protocol Row (Future AWS Use).",
+        "• .255 = Lobby Megaphone (Unused Broadcast)."
     ])
 
     add_card(s14, 6.8, 1.5, 5.7, 5.2, "Core Networking Building Blocks", [
-        "1. Subnets: Slices of the VPC assigned to specific Availability Zones.",
-        "2. Internet Gateway (IGW): The 2-way front gate connecting VPC to public Internet.",
-        "3. Route Tables: Road signs telling network packets where to travel next.",
-        "4. NAT Gateway: One-way security tunnel allowing private instances to fetch internet updates without accepting incoming connections.",
-        "5. Elastic IP (EIP): Static public IPv4 address that never changes when instance restarts."
+        "1. Subnets: Slices of seating assigned to specific Availability Zones (AZs).",
+        "2. Internet Gateway (IGW): Main 2-way double-door gate to the public highway.",
+        "3. Route Tables: Direction signboards guiding traffic packets.",
+        "4. NAT Gateway: Theatre boy with an outbound gate pass fetching updates.",
+        "5. IP Addressing:",
+        "   • Private IP: Fixed seat number (A-15).",
+        "   • Public IP: Temporary bike parking token #42 (changes on restart).",
+        "   • Elastic IP: Producer's permanent VIP Fortuner sticker."
     ])
 
     # =================================================================
     # SLIDE 15: Public vs Private Subnets (Route Table Logic)
     # =================================================================
     s15 = prs.slides.add_slide(blank_layout)
-    add_header(s15, "Public vs Private Subnets: The Route Table Decides!", "DAY 2")
+    add_header(s15, "Subnets & Routing: Ticket Counter vs Projector Room & Galla Pette", "DAY 2")
     add_footer(s15, 15, 30)
 
-    add_card(s15, 0.8, 1.5, 5.6, 5.2, "Public Subnet (The Front Showroom)", [
-        "Definition: A subnet whose Route Table contains a direct route to an Internet Gateway (IGW).",
+    add_card(s15, 0.8, 1.5, 5.6, 5.2, "Public Subnet (Ticket Counter & Canteen)", [
+        "Definition: Route Table points directly to Internet Gateway (IGW).",
         "Route Table Entry:",
-        "• Destination: 0.0.0.0/0 (All outside traffic)",
+        "• Destination: 0.0.0.0/0 (All internet traffic)",
         "• Target: igw-xxxxxxxx (Internet Gateway)",
         "Use Cases:",
-        "• Application Load Balancers (ALB) receiving public user web requests.",
-        "• Public Bastion Hosts / Jump boxes.",
-        "• Public-facing web servers.",
-        "Every resource must have a Public IPv4 address to reach the internet."
+        "• Application Load Balancer (ALB) receiving movie fans from highway.",
+        "• Public Bastion jump hosts.",
+        "• NAT Gateway with an Elastic IP badge.",
+        "Every resource here has a Public IPv4 address to exchange 2-way traffic."
     ], card_bg=RGBColor(0xEA, 0xF2, 0xF8))
 
-    add_card(s15, 6.8, 1.5, 5.7, 5.2, "Private Subnet (The VIP Garage / Vault)", [
-        "Definition: A subnet whose Route Table DOES NOT point to an IGW.",
+    add_card(s15, 6.8, 1.5, 5.7, 5.2, "Private Subnet (Projector Room & Galla Pette)", [
+        "Definition: Route Table DOES NOT point to an IGW. No direct highway access!",
         "Route Table Entry (For outbound internet access only):",
         "• Destination: 0.0.0.0/0",
-        "• Target: nat-xxxxxxxx (NAT Gateway residing in a Public Subnet)",
+        "• Target: nat-xxxxxxxx (NAT Gateway residing in Public Subnet)",
         "Use Cases:",
-        "• Backend microservices & application servers.",
-        "• Databases (RDS MySQL/Postgres, Aurora, DynamoDB VPC endpoints).",
-        "• Internal machine learning training nodes.",
-        "Benefit: Completely protected from direct malicious hackers on the Internet!"
+        "• EC2 Application servers ('Movie Operator Desk').",
+        "• Amazon RDS Multi-AZ Databases ('Producer Cash Safe - Galla Pette').",
+        "• Internal machine learning & private microservices.",
+        "Benefit: 100% shielded from internet port scans and cyber attacks!"
     ], card_bg=RGBColor(0xEA, 0xFA, 0xEA))
 
     # =================================================================
     # SLIDE 16: Security Groups vs NACLs
     # =================================================================
     s16 = prs.slides.add_slide(blank_layout)
-    add_header(s16, "Security Groups vs Network ACLs: Personal Bodyguard vs Gate Barrier", "DAY 2")
+    add_header(s16, "Firewalls: Bouncer Anna (Stateful) vs Police Checkpost (Stateless)", "DAY 2")
     add_footer(s16, 16, 30)
 
-    add_card(s16, 0.8, 1.5, 5.6, 5.2, "Security Groups (Personal Bodyguard)", [
+    add_card(s16, 0.8, 1.5, 5.6, 5.2, "Security Groups (Bouncer Anna at Screen Door)", [
         "Level: Operates at the INSTANCE (ENI) level.",
         "State: STATEFUL.",
-        "• If inbound traffic is allowed, outbound return traffic is automatically allowed, regardless of outbound rules!",
+        "• Bouncer Anna remembers you! If inbound is allowed, outbound return traffic is automatically allowed, regardless of outbound rules!",
         "Rules:",
-        "• ALLOW rules only (No explicit DENY rules).",
-        "• All rules evaluated before decision.",
-        "Analogy: A personal bodyguard sitting in the passenger seat who remembers who you invited inside."
+        "• ALLOW rules only (Everything else is denied by default).",
+        "• All rules evaluated simultaneously.",
+        "Primary Use: Opening Port 80/443 for web, Port 22 for SSH, Port 5432 for DB."
     ], card_bg=RGBColor(0xFE, 0xF9, 0xE7))
 
-    add_card(s16, 6.8, 1.5, 5.7, 5.2, "Network ACLs - NACL (Toll Gate Barrier)", [
+    add_card(s16, 6.8, 1.5, 5.7, 5.2, "Network ACLs - NACL (Police Checkpost at RTC X Roads)", [
         "Level: Operates at the SUBNET boundary level.",
         "State: STATELESS.",
-        "• Inbound and outbound traffic MUST be explicitly allowed in both directions!",
+        "• Police check your helmet & RC on entry AND explicitly re-check helmet & RC on exit! Outbound must be allowed.",
         "Rules:",
         "• Supports both ALLOW and DENY rules.",
         "• Evaluated in strict numerical order (Rule 100 before Rule 200). First match wins!",
-        "Analogy: A highway toll gate barrier that checks every license plate entering and exiting the district."
+        "Primary Use: Subnet-wide blacklisting of malicious hacker IP ranges."
     ], card_bg=RGBColor(0xFD, 0xED, 0xEC))
 
     # =================================================================
-    # SLIDE 17: ALB vs NLB & CloudFront Edge Delivery
+    # SLIDE 17: Public vs Private DNS & How HTTPS Works
     # =================================================================
     s17 = prs.slides.add_slide(blank_layout)
-    add_header(s17, "Traffic Routing & Acceleration: ALB, NLB & CloudFront", "DAY 2")
+    add_header(s17, "Route 53 DNS & How HTTPS Works (The Titanium Briefcase)", "DAY 2")
     add_footer(s17, 17, 30)
 
-    add_card(s17, 0.8, 1.5, 5.6, 5.2, "Load Balancers: ALB vs NLB", [
-        "Application Load Balancer (ALB) — Layer 7 (HTTP/HTTPS):",
-        "• Intelligent routing: Routes traffic based on URL path (/api vs /images) or hostname.",
-        "• SSL/TLS termination: Offloads encryption certificate handling from backend EC2s.",
-        "• Target Groups: Distributes traffic across EC2s, ECS containers, and Lambda.",
-        "",
-        "Network Load Balancer (NLB) — Layer 4 (TCP/UDP/TLS):",
-        "• Ultra-high performance: Millions of requests/second with ultra-low latency.",
-        "• Provides static IP addresses per AZ.",
-        "• Best for gaming servers, financial trading, and raw TCP streams."
-    ])
+    add_card(s17, 0.8, 1.5, 5.6, 5.2, "Route 53 DNS: Public vs Private Zones", [
+        "Amazon Route 53 Resolver (10.0.0.2 / VPC Base + 2):",
+        "• Sits at the Theatre Enquiry Counter to resolve names.",
+        "Public Hosted Zone (BookMyShow Movie Listings):",
+        "• Resolves public domains (tasktelangana.com) to public IPs worldwide.",
+        "Private Hosted Zone (Staff Confidential Intercom List):",
+        "• Resolves internal private names (safe.producer.internal ➔ 10.0.3.50).",
+        "• 100% invisible to the outside internet (returns NXDOMAIN)!",
+        "• VPC Flags: enableDnsSupport=true & enableDnsHostnames=true."
+    ], card_bg=RGBColor(0xEA, 0xF2, 0xF8))
 
-    add_card(s17, 6.8, 1.5, 5.7, 5.2, "Amazon CloudFront (Global CDN)", [
-        "Global network of 600+ Edge Locations closer to end users.",
-        "Caches static files (images, video, JS/CSS, HTML) from S3 origin.",
-        "Accelerates dynamic API requests via optimized AWS private backbone.",
-        "Time To Live (TTL): Defines how long edge servers cache objects before re-fetching from origin.",
-        "Cache Invalidation: Clear outdated files immediately (e.g., /* or /app.js).",
-        "Forces HTTPS and integrates with ACM free SSL certificates."
-    ])
+    add_card(s17, 6.8, 1.5, 5.7, 5.2, "How HTTPS Works: The Titanium Briefcase", [
+        "Plain HTTP (Port 80) = Postcard (Anyone at the tea stall can read it!).",
+        "HTTPS (Port 443) = Sealed Titanium Briefcase with Godrej Lock:",
+        "1. Client Hello: Browser sends supported TLS ciphers.",
+        "2. Server Hello + Certificate: Server sends Public Key signed by CA.",
+        "3. Verification: Browser verifies CA signature with Root trust store.",
+        "4. Key Exchange: Browser creates symmetric Session Key, encrypts with Server Public Key.",
+        "5. Decryption: Server decrypts using its secret Private Key.",
+        "6. Fast Symmetric Tunnel: All HTTP data encrypted with Session Key!",
+        "• TLS Termination at ALB: ALB decrypts at edge; forwards HTTP to EC2."
+    ], card_bg=RGBColor(0xFE, 0xF9, 0xE7))
 
     # =================================================================
     # SLIDE 18: AWS WAF & AWS Shield Perimeter Protection
@@ -994,11 +1017,14 @@ def create_deck(output_path):
     add_footer(s26, 26, 30)
 
     add_card(s26, 0.8, 1.5, 5.6, 5.2, "What is Infrastructure Drift?", [
-        "Definition: Drift occurs when a human engineer logs into the AWS Console and manually alters a resource (e.g., changes an EC2 instance type from t3.micro to m5.large, or opens Port 22 in a Security Group) without updating the CloudFormation template!",
+        "Definition: Drift occurs when someone logs into the AWS Console and manually alters a resource (e.g. changes EC2 size or opens Port 22 in Security Group) without updating the CloudFormation template!",
+        "Tollywood Analogy: The Bahubali Mahishmati Palace Set Blueprint:",
+        "• Master Architect draws the CAD blueprint in YAML.",
+        "• At midnight, an assistant director sneaks in and paints a pillar red without updating the blueprint!",
+        "• When the Architect runs Drift Detection, the scanner alarms: 'Pillar #4 DRIFTED! Expected: Gold, Actual: Red!'",
         "Why is Drift Dangerous?",
         "• Template is no longer the single source of truth.",
-        "• Next stack update might accidentally overwrite or conflict with manual changes.",
-        "• Security compliance is violated without audit trail."
+        "• Next stack deployment might overwrite or crash services."
     ])
 
     add_card(s26, 6.8, 1.5, 5.7, 5.2, "How CloudFormation Drift Detection Works", [
@@ -1075,5 +1101,5 @@ def create_deck(output_path):
     print(f"Successfully generated expanded 28-slide Masterclass presentation at: {output_path}")
 
 if __name__ == "__main__":
-    out_file = r"F:\Task( Telangana )\Nalgonda\Projects\task\module_03_aws_core\presentation\Module_03_AWS_Core_Services_Masterclass_v2.pptx"
+    out_file = r"e:\trainer\task\module_03_aws_core\presentation\Module_03_AWS_Core_Services_Masterclass.pptx"
     create_deck(out_file)
