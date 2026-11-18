@@ -3,7 +3,7 @@
 > **Center:** TASK Nalgonda Training Center  
 > **Trainer:** Sundeep Hiremat  
 > **Target Audience:** Engineering & Degree Students (UG & PG)  
-> **Skill Track:** Cloud Computing, AWS Cloud Architecture, Full-Stack Scripting & Generative AI  
+> **Skill Track:** Cloud Computing, AWS Cloud Architecture, Full-Stack Scripting & Generative AI 
 
 ---
 
