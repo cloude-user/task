@@ -1,105 +1,109 @@
-# Lab 4.5b: Data Security, AWS KMS, Secrets Manager & SSM Parameter Store
+# Lab 4.5b: AWS Data Security — KMS, Secrets Manager & SSM Parameter Store
 > **Course Track:** Cloud Software Developer (Module 4: AWS Solutions Architect)  
-> **Lab Code:** `LAB-4.5b`  
-> **Objective:** Create a Customer Managed KMS Key (CMK), enforce S3 SSE-KMS encryption, demonstrate dual-authorization access denial, store secrets in SSM Parameter Store & Secrets Manager, and schedule key deletion.  
-> **Estimated Duration:** 40 Minutes  
-> **Prerequisites:** Active AWS Account (Free Tier), IAM User with Administrative permissions.
+> **Lab Focus:** Hands-On Cryptography, SSE-KMS Dual-Gate Testing, Secrets Lifecycle & Centralized Config  
+> **Prerequisites:** Active AWS Account, IAM permissions for S3, KMS, Secrets Manager, and Systems Manager.  
 
 ---
 
-## 🛠️ Lab Architecture Overview
-
-In this lab, you will validate enterprise-grade cloud data security:
-1. **Part 1:** Provision an AWS KMS Customer Managed Key (CMK) with custom alias.
-2. **Part 2:** Enforce Server-Side Encryption (SSE-KMS) on an Amazon S3 object.
-3. **Part 3:** Conduct the "Aha!" Security Gate experiment by revoking `kms:Decrypt` access.
-4. **Part 4:** Create and query an SSM Parameter Store `SecureString` parameter.
-5. **Part 5:** Safely schedule KMS key deletion to maintain $0.00 zero-bill compliance.
-
----
-
-## 📋 Step-by-Step Lab Instructions
-
-### Part 1: Provision a Customer Managed Key (CMK)
-1. Log in to the **AWS Management Console** in your active region (e.g. `ap-south-1` Mumbai or `us-east-1`).
-2. Search for **KMS** in the top search bar and open **Key Management Service**.
-3. In the left panel, click **Customer managed keys** → Click **Create key**.
-4. Configure Step 1 (Configure key):
-   * Key type: **Symmetric**
-   * Key usage: **Encrypt and decrypt**
-   * Advanced options: Keep defaults (KMS origin) → Click **Next**.
-5. Configure Step 2 (Add labels):
-   * Alias: `student-demo-key`
-   * Description: `Lab 4.5b Customer Managed Encryption Key` → Click **Next**.
-6. Configure Step 3 (Define key administrative permissions):
-   * Select your current IAM User / Role as the Key Administrator → Click **Next**.
-7. Configure Step 4 (Define key usage permissions):
-   * Select your current IAM User as the Key User → Click **Next**.
-8. Configure Step 5 (Review):
-   * Inspect the generated JSON key policy statement.
-   * Notice the `"Action": ["kms:Encrypt", "kms:Decrypt", ...]` statement tied to your user ARN.
-   * Click **Finish**.
+## 🎯 Lab Objectives
+By the end of this lab, you will have successfully demonstrated:
+1. Creating a Customer Managed Key (CMK) in AWS KMS with alias `student-demo-key`.
+2. Securing an S3 object using SSE-KMS Server-Side Encryption.
+3. Validating the Dual-Gate Authorization Model (proving S3 Admin cannot read without `kms:Decrypt`).
+4. Storing production database credentials in AWS Secrets Manager.
+5. Managing hierarchical microservice configuration using SSM Parameter Store (`String` and `SecureString`).
+6. Executing a zero-spend clean-up and scheduling KMS key deletion.
 
 ---
 
-### Part 2: Secure an S3 Object with SSE-KMS
-1. Navigate to the **Amazon S3** console.
-2. Select an existing bucket (or create a temporary bucket named `task-kms-lab-[your-name]`).
-3. Prepare a local test file on your computer named `secret_credentials.txt` containing:
+## 🛠️ Step-by-Step Practical Instructions
+
+### Task 1: Create a Customer Managed Key (CMK)
+1. Open the **AWS Management Console** → Search for and select **Key Management Service (KMS)**.
+2. In the navigation pane on the left, click **Customer managed keys** → Click **Create key**.
+3. In **Step 1 (Configure key)**:
+   - Key type: **Symmetric**
+   - Key usage: **Encrypt and decrypt**
+   - Advanced options: Leave default (KMS) → Click **Next**.
+4. In **Step 2 (Add labels)**:
+   - Alias: `student-demo-key`
+   - Description: `TASK Module 4 Demo Key for Data Security & Cryptography` → Click **Next**.
+5. In **Step 3 (Define key administrative permissions)**:
+   - Select your current IAM User or role → Click **Next**.
+6. In **Step 4 (Define key usage permissions)**:
+   - Select your current IAM User or role → Click **Next**.
+7. In **Step 5 (Review)**:
+   - Review the JSON policy and click **Finish**.
+   - Note the **Key ID** and **Key ARN**.
+
+### Task 2: Upload and Encrypt an S3 Object with SSE-KMS
+1. Navigate to the **Amazon S3 Console** → Open your existing lab bucket (or create `task-data-security-<your-name>`).
+2. On your computer, open Notepad and create a file called `secret_credentials.txt`:
    ```text
-   PRODUCTION APPLICATION CONFIG:
-   DATABASE_HOST=db.task-internal.net
-   DATABASE_PORT=5432
-   MASTER_PASSWORD=SuperSecretKMSPassword#2026
+   CONFIDENTIAL TASK APPLICATION CREDENTIALS:
+   DATABASE_ENGINE=postgresql
+   DATABASE_HOST=prod-cluster.c7z9k.ap-south-1.rds.amazonaws.com
+   DATABASE_USER=db_superadmin
+   DATABASE_PASSWORD=TaskCloudEngineer#2026!
    ```
-4. Click **Upload** → Select `secret_credentials.txt`.
-5. Expand **Properties** → Scroll to **Server-side encryption settings**:
-   * Select **Specify an encryption key**.
-   * Select **AWS Key Management Service key (SSE-KMS)**.
-   * Key: Choose **Choose from your AWS KMS keys** → Select `student-demo-key`.
-   * Bucket Key: Select **Enable** (recommended best practice to reduce KMS request cost).
-6. Click **Upload**.
+3. In the S3 Console, click **Upload** → Add `secret_credentials.txt`.
+4. Expand the **Properties** section:
+   - Scroll down to **Server-side encryption settings**.
+   - Select **Specify an encryption key**.
+   - Encryption type: **AWS Key Management Service key (SSE-KMS)**.
+   - Choose **Choose from your AWS KMS keys** → Select `student-demo-key`.
+   - Bucket Key: Select **Enable**.
+5. Click **Upload**.
+
+### Task 3: The Dual-Gate Security Test (The "Aha!" Moment)
+1. In the S3 Console, click on `secret_credentials.txt` → Click **Open**.
+   - *Result:* The file opens cleanly and displays your database credentials. (Gate 1 and Gate 2 both passed).
+2. Now, simulate revoking cryptographic access:
+   - Open **AWS KMS** in a new browser tab → Click **Customer managed keys** → Click `student-demo-key`.
+   - Switch to the **Key policy** tab → Click **Edit**.
+   - Find your IAM User ARN in the `"Statement"` for Key Users and delete the `"kms:Decrypt"` permission, or add an explicit `"Effect": "Deny"` statement for your user on `"kms:Decrypt"`.
+   - Click **Save changes**.
+3. Return to **Amazon S3** and refresh the page → Click **Open** on `secret_credentials.txt`:
+   - *Result:* **HTTP 403 Forbidden / Access Denied!**
+   - *Core Lesson:* Even if you have full S3 administrator permissions, without cryptographic permission in the KMS Key Policy, you cannot view the data.
+4. Edit the KMS Key Policy and remove the Deny statement so your user can decrypt once again.
+
+### Task 4: Store Credentials in AWS Secrets Manager
+1. Navigate to the **AWS Secrets Manager** Console → Click **Store a new secret**.
+2. **Secret type:** Choose **Other type of secret**.
+3. In the **Key/value pairs** table, enter:
+   - Key: `api_key` | Value: `sec_live_994820194820`
+   - Key: `jwt_secret` | Value: `jwt_super_token_hash_2026`
+4. Encryption key: Select `student-demo-key` → Click **Next**.
+5. **Secret name:** Enter `ecommerce/prod/payment_gateway` → Click **Next**.
+6. **Configure rotation:** Leave disabled for this quick demo → Click **Next**.
+7. Review and click **Store**.
+8. Click on your secret → Click **Retrieve secret value** to inspect the encrypted payload.
+
+### Task 5: Store Hierarchical Config in SSM Parameter Store
+1. Open **AWS Systems Manager** → In the left navigation, select **Parameter Store**.
+2. Click **Create parameter**.
+3. Create Parameter 1 (Plaintext Configuration):
+   - Name: `/ecommerce/prod/frontend/cdn_url`
+   - Description: `Production CloudFront CDN Endpoint`
+   - Tier: **Standard**
+   - Type: **String**
+   - Value: `https://d111111abcdef8.cloudfront.net`
+   - Click **Create parameter**.
+4. Click **Create parameter** again to create Parameter 2 (Encrypted Secret):
+   - Name: `/ecommerce/prod/backend/jwt_private_key`
+   - Tier: **Standard**
+   - Type: **SecureString**
+   - KMS Key Source: Select **My current account** → Choose `student-demo-key`.
+   - Value: `MIIEowIBAAKCAQEA0Y9X7e...private_rsa_key`
+   - Click **Create parameter**.
+5. Observe the Parameter Store list: Notice how `SecureString` hides the sensitive value behind `******`.
+
+### Task 6: Zero-Spend Clean-Up Protocol
+1. **Secrets Manager:** Select `ecommerce/prod/payment_gateway` → Actions → **Delete secret** → Click **Delete immediately**.
+2. **SSM Parameter Store:** Select both created parameters → Click **Delete**.
+3. **Amazon S3:** Delete `secret_credentials.txt` from your bucket.
+4. **AWS KMS:** Select `student-demo-key` → Key actions → **Schedule key deletion** → Enter **7 days** → Click **Schedule deletion**.
 
 ---
-
-### Part 3: The "Aha!" Security Verification (Separation of Duty)
-1. In the S3 console, click `secret_credentials.txt` → Click **Open**.
-   * **Verification:** The file opens cleanly in your browser.
-2. Now open a new browser tab and navigate to **AWS KMS** → Select `student-demo-key`.
-3. Click the **Key policy** tab → Click **Edit**.
-4. Scroll to the statement granting `"kms:Decrypt"` to your IAM user.
-5. Temporarily delete your user ARN from the `"Principal"` block (or change `"kms:Decrypt"` to `"kms:DisableKey"`), then click **Save changes**.
-6. Switch back to your S3 tab and click **Open** or **Download** on `secret_credentials.txt`.
-7. **Expected Result:**
-   * Your browser displays `HTTP 403 Forbidden: Access Denied`.
-   * **Critical Learning:** Even if an attacker compromises S3 storage permissions, they cannot read data without explicit authorization from the KMS Key Policy!
-
----
-
-### Part 4: Storing Secrets in AWS SSM Parameter Store
-1. In the top search bar, search for **Systems Manager** → Open **Systems Manager**.
-2. In the left navigation, scroll to **Application Management** → Click **Parameter Store**.
-3. Click **Create parameter**.
-4. Configure the parameter:
-   * **Name:** `/taskapp/production/db_password` (Hierarchical naming)
-   * **Description:** `Production Database Password`
-   * **Tier:** **Standard** (Free tier)
-   * **Type:** Select **SecureString**
-   * **KMS Key source:** Select **My current account** → Choose `student-demo-key` (or default `alias/aws/ssm`).
-   * **Value:** `ProdDbPass_9872!#`
-5. Click **Create parameter**.
-6. In the list, click `/taskapp/production/db_password` → Observe that the value is masked (`*****`).
-7. Click **Show** to decrypt the value via KMS on demand.
-
----
-
-### Part 5: Mandatory Resource Cleanup (Zero-Spend Guardrail)
-1. In **Amazon S3**:
-   * Delete the object `secret_credentials.txt`.
-   * Empty and delete the bucket if created solely for this lab.
-2. In **AWS Systems Manager Parameter Store**:
-   * Select `/taskapp/production/db_password` → Click **Delete**.
-3. In **AWS KMS**:
-   * Select `student-demo-key` → Click **Key actions** → **Schedule key deletion**.
-   * Waiting period: Enter `7` days (AWS minimum enforced safety window).
-   * Confirm and schedule deletion.
+*© Telangana Academy for Skill and Knowledge (TASK) — Lab 4.5b*
