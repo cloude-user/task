@@ -253,7 +253,30 @@ Create **two Security Groups** in your Default VPC via AWS Console:
 
 ### Step 6: Create ECS Task Definition & Run 2 Tasks
 
-1. Go to **ECS Console** → **Task definitions** → **Create new task definition with JSON**:
+#### A. Ensure ECS Task Execution Role Exists
+> [!IMPORTANT]
+> **Fargate Execution Role Required for Private ECR:**  
+> When using AWS Fargate with container images stored in private Amazon ECR, Fargate requires an **Execution Role (`executionRoleArn`)** with `AmazonECSTaskExecutionRolePolicy` to authenticate and pull your image during task startup. Without it, ECS throws:  
+> `Fargate requires task definition to have execution role ARN to support ECR images.`
+
+You can verify and create this role with a single command on your EC2 build host:
+```bash
+# Create the ecsTaskExecutionRole (if it doesn't already exist)
+aws iam create-role \
+  --role-name ecsTaskExecutionRole \
+  --assume-role-policy-document '{"Version":"2012-10-17","Statement":[{"Effect":"Allow","Principal":{"Service":"ecs-tasks.amazonaws.com"},"Action":"sts:AssumeRole"}]}' 2>/dev/null || echo "Role already exists"
+
+# Attach the required AWS managed policy
+aws iam attach-role-policy \
+  --role-name ecsTaskExecutionRole \
+  --policy-arn arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy
+```
+*(Or in AWS Console: IAM → Roles → Create role → AWS Service: **Elastic Container Service** → Use case: **Elastic Container Service Task** → Attach **`AmazonECSTaskExecutionRolePolicy`** → Name: **`ecsTaskExecutionRole`**).*
+
+---
+
+#### B. Create Task Definition with JSON
+1. Go to **ECS Console** → **Task definitions** → **Create new task definition with JSON**.
 2. Replace `<AWS_ACCOUNT_ID>`, `<AWS_REGION>`, and `<EFS_FS_ID>`:
 
 ```json
@@ -263,6 +286,7 @@ Create **two Security Groups** in your Default VPC via AWS Console:
   "requiresCompatibilities": ["FARGATE"],
   "cpu": "256",
   "memory": "512",
+  "executionRoleArn": "arn:aws:iam::<AWS_ACCOUNT_ID>:role/ecsTaskExecutionRole",
   "volumes": [
     {
       "name": "efs-notes-volume",
@@ -290,15 +314,17 @@ Create **two Security Groups** in your Default VPC via AWS Console:
 }
 ```
 
-3. **Run 2 Independent Standalone Tasks on ECS Fargate:**
-   - Go to your ECS Cluster → **Tasks** tab → **Run new task**.
-   - **Launch type:** FARGATE.
-   - **Task definition:** `shared-notes-task`.
-   - **Number of tasks:** `2`.
-   - **VPC:** Default VPC.
-   - **Subnets:** Select Default Subnets.
-   - **Security Group:** Select `sg-ecs-tasks`.
-   - ⚠️ **CRITICAL SETTING:** **Public IP = `ENABLED`** (Turned ON).
+---
+
+#### C. Run 2 Independent Standalone Tasks on ECS Fargate
+1. Go to your ECS Cluster → **Tasks** tab → **Run new task**.
+2. **Launch type:** FARGATE.
+3. **Task definition:** `shared-notes-task`.
+4. **Number of tasks:** `2`.
+5. **VPC:** Default VPC.
+6. **Subnets:** Select Default Subnets.
+7. **Security Group:** Select `sg-ecs-tasks`.
+8. ⚠️ **CRITICAL SETTING:** **Public IP = `ENABLED`** (Turned ON).
 
 #### Verification Screenshot: Both Tasks Running
 Once started, note the public IPv4 addresses for **Task 1** and **Task 2**:
