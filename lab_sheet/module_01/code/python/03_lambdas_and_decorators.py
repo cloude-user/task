@@ -1,26 +1,21 @@
 """
-03_lambdas_and_decorators.py
-=============================
-Topic: Anonymous Lambda Functions & Function Decorators
-Analogy: The Disposable Cup & The Airport Security Checkpoint
+03_lambdas_and_decorators.py -> 03_lambdas_and_closures.py
+==========================================================
+Topic: Anonymous Lambda Functions & Function Closures (KISS Principle)
+Analogy: The Disposable Paper Cup & The Personalized Stamp Maker
 
 ANALOGY FOR STUDENTS:
 ---------------------
-1. Lambda Function = The Disposable Paper Cup / Quick Token.
+1. Lambda Function = The Disposable Paper Cup.
    - If you just need a sip of water right now, you don't take out a ceramic mug,
      wash it, and put it on a shelf (def function). You grab a paper cup (lambda),
      drink in one second, and toss it!
    - Lambda is for quick, 1-line operations inside sorted(), map(), or filter().
 
-2. Decorator (@) = The Airport Security Scanner & Passport Stamp.
-   - Every passenger (function) that wants to board the flight (execute)
-     MUST pass through the security scanner first.
-   - The security guard (decorator wrapper) checks your ticket, logs your arrival time,
-     and if you're cleared, lets you proceed!
+2. Function Closures = The Personalized Stamp Maker.
+   - You configure the stamp once with a fixed prefix ("TASK-Nalgonda").
+   - It gives you a tool that permanently remembers that setting without retyping it!
 """
-
-import time
-import functools
 
 print("=" * 70)
 print("🥤 PART 1: LAMBDA FUNCTIONS (The Disposable Paper Cup)")
@@ -51,66 +46,36 @@ print("\nEBS Volumes sorted by size (smallest to largest):")
 for v in by_size:
     print(f"  • {v['vol_id']}: {v['size_gib']} GiB (${v['cost_usd']}/mo)")
 
-# Filter using lambda: Volumes larger than 100 GiB
+# Filter using lambda: Volumes larger than or equal to 500 GiB
 large_vols = list(filter(lambda v: v["size_gib"] >= 500, ebs_volumes))
 print("\nLarge Volumes (>= 500 GiB):", [v["vol_id"] for v in large_vols])
 
 
 print("\n" + "=" * 70)
-print("🛂 PART 2: DECORATORS (The Airport Security Checkpoint)")
+print("📦 PART 2: FUNCTION CLOSURES (The Personalized Stamp Maker)")
 print("=" * 70)
 
-# Decorator 1: Latency / Execution Time Logger (CloudWatch Metric Tracker)
-def log_latency(func):
-    """Airport Security Checkpoint: Measures how long passenger takes to pass."""
-    @functools.wraps(func)
-    def wrapper(*args, **kwargs):
-        print(f"\n🛫 [Security Gate] Starting execution of: '{func.__name__}'")
-        start = time.time()
-        
-        # Execute the original function!
-        result = func(*args, **kwargs)
-        
-        elapsed_ms = (time.time() - start) * 1000
-        print(f"🛬 [Security Gate] '{func.__name__}' completed in {elapsed_ms:.2f} ms")
-        return result
-    return wrapper
+# Outer function creates and returns an inner function that remembers outer variables
+def make_cloud_cost_calculator(hourly_rate: float, currency: str = "USD"):
+    """
+    Outer function sets up the rate and currency.
+    Returns an inner function (closure) that remembers both!
+    """
+    def calculate(hours: int):
+        total = hours * hourly_rate
+        return f"{total:.2f} {currency}"
+    return calculate
 
-# Decorator 2: Cloud Resilience Auto-Retry (Exponential Backoff)
-def retry_on_cloud_throttle(max_attempts=3, delay_sec=1):
-    """Retries a failed API call if AWS responds with throttling / 429."""
-    def decorator(func):
-        @functools.wraps(func)
-        def wrapper(*args, **kwargs):
-            attempts = 0
-            while attempts < max_attempts:
-                try:
-                    return func(*args, **kwargs)
-                except Exception as err:
-                    attempts += 1
-                    print(f"⚠️ [Attempt {attempts}/{max_attempts}] AWS API throttled: {err}. Retrying in {delay_sec}s...")
-                    time.sleep(delay_sec)
-            raise RuntimeError(f"❌ Function '{func.__name__}' failed permanently after {max_attempts} attempts.")
-        return wrapper
-    return decorator
+# Specialized calculators configured once
+t3_micro_calculator = make_cloud_cost_calculator(0.0208, "USD")
+c5_xlarge_calculator = make_cloud_cost_calculator(0.1700, "USD")
+storage_inr_calculator = make_cloud_cost_calculator(6.50, "INR")
 
+print("t3.micro for 24 hours:   ", t3_micro_calculator(24))
+print("t3.micro for 720 hours:  ", t3_micro_calculator(720))
+print("c5.xlarge for 24 hours:  ", c5_xlarge_calculator(24))
+print("Storage cost for 30 days:", storage_inr_calculator(30))
 
-# Applying BOTH decorators to an AWS API call!
-# (Decorators stack like layers of security checkpoints!)
-simulated_network_failures = 0
-
-@log_latency
-@retry_on_cloud_throttle(max_attempts=3, delay_sec=0.5)
-def upload_file_to_s3(bucket_name, file_name):
-    global simulated_network_failures
-    simulated_network_failures += 1
-    
-    # Simulate network hiccups on first 2 calls
-    if simulated_network_failures < 2:
-        raise ConnectionResetError("503 Service Unavailable / Network Jitter")
-        
-    return f"s3://{bucket_name}/{file_name} uploaded successfully."
-
-# Run the decorated function
-response = upload_file_to_s3("task-nalgonda-assets", "portfolio_template.zip")
-print("\nFinal Result from AWS:", response)
+print("\n" + "=" * 70)
+print("✅ Core functions, lambdas, and closures demonstrated successfully (KISS Principle).")
+print("=" * 70)

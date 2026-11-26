@@ -1,8 +1,8 @@
 /**
  * 01_variables_and_collections.js
  * ================================
- * Topic: JavaScript (Node.js) Variables, Types, Arrays, and Objects
- * Analogy: The Flexible Modern Locker Room
+ * Topic: JavaScript Variables, Primitive vs Reference Types, Arrays, and Objects
+ * Analogy: The Flexible Modern Locker Room & The Address Slip
  *
  * ANALOGY FOR STUDENTS:
  * ---------------------
@@ -12,12 +12,19 @@
  *    - You can erase and write a new value anytime (mutable).
  * 3. var = An Old megaphone that echoes everywhere (Hoisting & Function scope).
  *    - DO NOT USE var in modern cloud code! It leaks out of if-blocks and causes bugs.
- * 4. Array [] = A high-speed conveyor belt (like Python lists, but with .map and .filter built in).
- * 5. Object {} = The Master Cloud Payload (Key-Value pairs, exactly like JSON).
+ * 4. PRIMITIVE vs REFERENCE TYPES (Memory Model):
+ *    - Primitive (number, string, boolean, null, undefined) = Pass by VALUE.
+ *      Like writing a number on a sticky note and handing it to a friend. If they erase theirs,
+ *      your note stays identical!
+ *    - Reference (Array, Object, Function) = Pass by REFERENCE.
+ *      Like handing your friend the key/address slip to your locker. If they open the locker
+ *      and change the contents, YOUR locker content changes too!
+ * 5. Array [] = A high-speed conveyor belt (like Python lists, but with .map and .filter built in).
+ * 6. Object {} = The Master Cloud Payload (Key-Value pairs, exactly like JSON & Python dicts).
  */
 
 console.log("=".repeat(70));
-console.log("📦 PART 1: const vs let (Laser Plaque vs Whiteboard)");
+console.log("📦 PART 1: const vs let vs var (Laser Plaque vs Whiteboard)");
 console.log("=".repeat(70));
 
 // const: Binding cannot be reassigned
@@ -38,7 +45,36 @@ console.log(`Slot:     ${unassignedSlot} (${typeof unassignedSlot})\n`);
 
 
 console.log("=".repeat(70));
-console.log("🛒 PART 2: ARRAYS & TRANSFORMATIONS (The Conveyor Belt)");
+console.log("🧠 PART 2: PRIMITIVE vs REFERENCE TYPES (Value vs Address)");
+console.log("=".repeat(70));
+
+// A. Primitive Type (Pass by Value)
+let initialBalance = 1000;
+let clonedBalance = initialBalance; // Direct value copy
+clonedBalance = 2500;
+
+console.log("--- Primitive (Numbers) ---");
+console.log("initialBalance:", initialBalance); // 1000 (Unaffected!)
+console.log("clonedBalance: ", clonedBalance);  // 2500
+
+// B. Reference Type (Pass by Pointer / Reference)
+const serverNodeA = { id: "node-01", status: "STOPPED", ip: "10.0.1.15" };
+const serverNodeB = serverNodeA; // Copies MEMORY ADDRESS, not a separate object!
+
+serverNodeB.status = "RUNNING"; // Mutates the underlying shared memory
+
+console.log("\n--- Reference (Objects / Memory Pointer) ---");
+console.log("serverNodeA.status:", serverNodeA.status); // RUNNING! (Changed!)
+console.log("serverNodeB.status:", serverNodeB.status); // RUNNING!
+console.log("Comparison (serverNodeA === serverNodeB):", serverNodeA === serverNodeB); // true
+
+// Comparison with Python:
+// In Python: dict_a = {'status': 'STOPPED'}; dict_b = dict_a; dict_b['status'] = 'RUNNING'
+// Result is identical in Python: dict_a['status'] becomes 'RUNNING'.
+
+
+console.log("\n" + "=".repeat(70));
+console.log("🛒 PART 3: ARRAYS & TRANSFORMATIONS (The Conveyor Belt)");
 console.log("=".repeat(70));
 
 const servers = ["web-01", "web-02", "app-01", "app-02", "db-01"];
@@ -60,7 +96,7 @@ console.log("Filtered Web Tier:", webTier, "\n");
 
 
 console.log("=".repeat(70));
-console.log("🔑 PART 3: OBJECTS & OPTIONAL CHAINING (The Master Payload)");
+console.log("🔑 PART 4: OBJECTS & OPTIONAL CHAINING (The Master Payload)");
 console.log("=".repeat(70));
 
 const ec2Config = {
@@ -86,7 +122,7 @@ console.log("Monitoring: ", monitoring, "\n");
 
 
 console.log("=".repeat(70));
-console.log("🎟️ PART 4: SETS & MAPS (Deduplication & Fast Lookups)");
+console.log("🎟️ PART 5: SETS & MAPS (Deduplication & Fast Lookups)");
 console.log("=".repeat(70));
 
 const loggedRegions = ["ap-south-1", "us-east-1", "ap-south-1", "eu-west-1", "us-east-1"];
