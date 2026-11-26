@@ -54,6 +54,7 @@ If Docker is not installed or locked on your local Windows PC, launch a free-tie
    - **Instance Type:** `t2.micro` or `t3.micro`
    - **Key Pair:** *Proceed without a key pair* (we will connect via browser)
    - **VPC / Subnet:** Default VPC (any default subnet)
+   - **IAM Role (Recommended):** Under *Advanced details* → *IAM instance profile*, select an IAM role with ECR permissions (`AmazonEC2ContainerRegistryPowerUser`). If you don't have one yet, you can attach it later in Step 3.
 2. **Connect via Browser:**
    - Select the instance → Click **Connect** → Choose **EC2 Instance Connect** → Click **Connect**.
 3. **Install and Start Docker (Run once in EC2 terminal):**
@@ -161,39 +162,58 @@ ls -la
 
 ### Step 3: Build Docker Image and Push to Amazon ECR
 
-1. Configure AWS credentials on your EC2 build host:
-   ```bash
-   aws configure
-   # Enter your AWS Access Key ID, Secret Access Key, and Default region (e.g. us-east-1)
-   ```
+#### Authentication: Do you need `aws configure`?
+> [!IMPORTANT]
+> **No hardcoded credentials needed! (AWS Best Practice)**  
+> Rather than typing long-term Access Keys into `aws configure`, attach an **IAM Role** to your EC2 instance. The AWS CLI inside EC2 will authenticate automatically without storing any keys on disk.
 
-2. Run the build and push commands:
-   ```bash
-   # Set target region (e.g. us-east-1 or ap-south-1)
-   AWS_REGION="us-east-1"
-   ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
-   REPO_NAME="shared-notes-api"
+##### Method A: Attach an IAM Role (Recommended — Zero Credentials to type)
+1. In AWS Console, go to **IAM** → **Roles** → **Create role**.
+2. Select **AWS service** → Use case: **EC2** → Click **Next**.
+3. Under permissions policies, search and select **`AmazonEC2ContainerRegistryPowerUser`** (or `AdministratorAccess`).
+4. Name the role **`EC2-ECR-Role`** and click **Create role**.
+5. In **EC2 Console**, select your `docker-builder` instance → **Actions** → **Security** → **Modify IAM role** → Select **`EC2-ECR-Role`** → Click **Update IAM role**.
+6. **Done!** You do not need to run `aws configure`. Proceed straight to the commands below.
 
-   # 1. Create ECR repository (if not already created)
-   aws ecr create-repository --repository-name $REPO_NAME --region $AWS_REGION 2>/dev/null || echo "Repo exists"
+##### Method B: Alternative (Using `aws configure`)
+If you prefer using an IAM User's access keys instead of an IAM Role:
+```bash
+aws configure
+# Enter your AWS Access Key ID, Secret Access Key, and Default region (e.g. us-east-1)
+```
 
-   # 2. Build Docker container image
-   docker build -t $REPO_NAME .
+---
 
-   # 3. Authenticate Docker with Amazon ECR
-   aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin ${ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com
+#### Run the Build and Push Script (Copy-Paste)
 
-   # 4. Tag image with ECR URI
-   docker tag ${REPO_NAME}:latest ${ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${REPO_NAME}:latest
+Run this block directly in your EC2 terminal:
 
-   # 5. Push image to Amazon ECR
-   docker push ${ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${REPO_NAME}:latest
+```bash
+# Set target region (e.g. us-east-1 or ap-south-1)
+export AWS_REGION="us-east-1"
+ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
+REPO_NAME="shared-notes-api"
 
-   echo "============================================================"
-   echo "YOUR ECR IMAGE URI:"
-   echo "${ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${REPO_NAME}:latest"
-   echo "============================================================"
-   ```
+# 1. Create ECR repository (if not already created)
+aws ecr create-repository --repository-name $REPO_NAME --region $AWS_REGION 2>/dev/null || echo "Repo exists"
+
+# 2. Build Docker container image
+docker build -t $REPO_NAME .
+
+# 3. Authenticate Docker with Amazon ECR (Uses attached IAM Role automatically!)
+aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin ${ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com
+
+# 4. Tag image with ECR URI
+docker tag ${REPO_NAME}:latest ${ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${REPO_NAME}:latest
+
+# 5. Push image to Amazon ECR
+docker push ${ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${REPO_NAME}:latest
+
+echo "============================================================"
+echo "SUCCESS! YOUR ECR IMAGE URI IS:"
+echo "${ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${REPO_NAME}:latest"
+echo "============================================================"
+```
 
 ---
 
