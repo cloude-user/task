@@ -354,26 +354,78 @@ df -h | grep efs
 
 ### Step 8: Complete Verification Proof
 
-#### Test A: Postman / cURL Sharing Proof (Task 1 ➔ Task 2)
+#### Test A: Postman Verification (Recommended)
 
-1. **Write a note via Task 1:**
-   ```bash
-   curl -X POST http://<TASK_1_PUBLIC_IP>:3000/notes \
-     -H "Content-Type: application/json" \
-     -d '{"title": "Project_Milestone_Alpha", "note": "Backend API successfully persisted on AWS EFS shared storage!"}'
-   ```
-   *Response:* `{"message":"Saved to EFS","filename":"Project_Milestone_Alpha_1722080000.txt"}`
+##### 1. POST Request — Save Note via Task 1
+- **Method:** `POST`
+- **URL:** `http://<TASK_1_PUBLIC_IP>:3000/notes`
+- **Headers:**
+  - `Content-Type`: `application/json`
+- **Body:** Select **raw** → Choose **JSON**:
+  ```json
+  {
+    "title": "Project_Milestone_Alpha",
+    "note": "Backend API successfully persisted on AWS EFS shared storage!"
+  }
+  ```
+- **Click Send** → Expected Response (`201 Created`):
+  ```json
+  {
+    "message": "Saved to EFS",
+    "filename": "Project_Milestone_Alpha_1732617700000.txt"
+  }
+  ```
 
-2. **Retrieve notes via Task 2:**
-   ```bash
-   curl -X GET http://<TASK_2_PUBLIC_IP>:3000/notes
-   ```
-   *Response:* Task 2 instantly returns the note written by Task 1!
+---
+
+##### 2. GET Request — Read Note via Task 2 (Proves EFS Shared Storage)
+- **Method:** `GET`
+- **URL:** `http://<TASK_2_PUBLIC_IP>:3000/notes`
+- **Headers:** *(None required)*
+- **Body:** *(None)*
+- **Click Send** → Expected Response (`200 OK`):
+  ```json
+  {
+    "total": 1,
+    "notes": [
+      {
+        "filename": "Project_Milestone_Alpha_1732617700000.txt",
+        "content": "Backend API successfully persisted on AWS EFS shared storage!"
+      }
+    ]
+  }
+  ```
 
 ![Postman Proof](images/04_postman_sharing_proof.svg)
 
-#### Test B: EC2 Terminal Proof
-On the mounted EC2 instance terminal:
+---
+
+#### Test B: Terminal / CLI Verification (Alternative to Postman)
+
+- **Windows PowerShell:**
+  ```powershell
+  # 1. POST Note via Task 1
+  curl.exe -X POST http://<TASK_1_PUBLIC_IP>:3000/notes -H "Content-Type: application/json" -d "{\"title\": \"Project_Milestone_Alpha\", \"note\": \"Backend API successfully persisted on AWS EFS shared storage!\"}"
+
+  # 2. GET Notes via Task 2
+  curl.exe http://<TASK_2_PUBLIC_IP>:3000/notes
+  ```
+
+- **Linux / macOS Bash:**
+  ```bash
+  # 1. POST Note via Task 1
+  curl -X POST http://<TASK_1_PUBLIC_IP>:3000/notes \
+    -H "Content-Type: application/json" \
+    -d '{"title": "Project_Milestone_Alpha", "note": "Backend API successfully persisted on AWS EFS shared storage!"}'
+
+  # 2. GET Notes via Task 2
+  curl http://<TASK_2_PUBLIC_IP>:3000/notes
+  ```
+
+---
+
+#### Test C: EC2 Terminal Proof
+On your mounted EC2 instance terminal:
 ```bash
 ls -la /mnt/efs/notes/
 cat /mnt/efs/notes/Project_Milestone_Alpha_*.txt
