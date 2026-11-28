@@ -40,5 +40,5 @@ Since AWS CloudShell may not be enabled in your lab account, choose **either** o
 | :--- | :--- | :--- |
 | **Module 5.1 (M5-T1)** | AWS CLI, Credential Chain, Python `boto3`, & Lambda X-Ray Tracing | [module_5.1_cli_sdk_xray/README.md](module_5.1_cli_sdk_xray/README.md) |
 | **Module 5.2 (M5-T2)** | SQS (Standard, DLQ, FIFO), SNS Fan-out & Filters, DynamoDB Pipeline | [module_5.2_sqs_sns_dynamodb/README.md](module_5.2_sqs_sns_dynamodb/README.md) |
-| **Module 5.3 (M5-T3)** | *(Coming next)* | — |
+| **Module 5.3 (M5-T3)** | DynamoDB (GSI, CRUD, Locking, TTL, Streams) & Valkey Cache-Aside | [module_5.3_dynamodb_valkey/README.md](module_5.3_dynamodb_valkey/README.md) |
 | **Module 5.4 (M5-T4)** | *(Coming next)* | — |
